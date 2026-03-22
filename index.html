@@ -2,11 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مروة - مساعدك الشخصي الشامل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>مروة - مساعدك الشخصي</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,27 +21,25 @@
             --primary-gold-dark: #B8941F;
             --bg-dark: #0A0A0A;
             --bg-card: #151515;
-            --bg-card-hover: #1F1F1F;
             --text-primary: #FFFFFF;
             --text-secondary: #A0A0A0;
             --accent-rose: #E8B4B8;
-            --accent-teal: #2DD4BF;
-            --accent-purple: #A78BFA;
             --danger: #EF4444;
             --success: #10B981;
             --warning: #F59E0B;
         }
 
         body {
-            font-family: 'Cairo', 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
 
-        /* Animated Background */
+        /* Premium Gradient Background */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -50,2321 +48,1006 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(167, 139, 250, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.05) 0%, transparent 70%),
+                radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
                 var(--bg-dark);
             z-index: -1;
         }
 
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        /* Main Container - Full Height, No Scroll */
+        .app-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             overflow: hidden;
         }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-gold);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 15s infinite;
+        /* Fixed Header */
+        .premium-header {
+            background: rgba(10, 10, 18, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            flex-shrink: 0;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        /* Container */
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 16px;
-            position: relative;
-            min-height: 100vh;
-            padding-bottom: 100px;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 30px 0 20px;
-            position: relative;
+        .greeting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
         }
 
         .logo {
-            font-size: 2.8rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 50%, var(--primary-gold) 100%);
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
-            letter-spacing: 1px;
+            color: transparent;
         }
 
-        @keyframes shimmer {
-            to { background-position: 200% center; }
-        }
-
-        .user-greeting {
-            margin-top: 8px;
-            font-size: 1.2rem;
-            color: var(--primary-gold-light);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .level-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: linear-gradient(135deg, var(--primary-gold-dark), var(--primary-gold));
-            color: var(--bg-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        /* Glass Cards */
-        .glass-card {
-            background: rgba(21, 21, 21, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 24px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-            transition: left 0.7s;
-        }
-
-        .glass-card:hover::before {
-            left: 100%;
-        }
-
-        /* Quick Stats Row */
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .quick-stat {
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 16px 8px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .quick-stat:active {
-            transform: scale(0.95);
-        }
-
-        .quick-stat-icon {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        .quick-stat-value {
-            font-size: 1.1rem;
-            font-weight: 700;
+        .crown-icon {
+            font-size: 1.3rem;
             color: var(--primary-gold);
         }
 
-        .quick-stat-label {
+        .user-greeting {
+            margin-top: 4px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .highlight-name {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        /* Stats Row - Compact */
+        .stats-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .stat-badge {
+            flex: 1;
+            background: rgba(212, 175, 55, 0.12);
+            border-radius: 20px;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tab Navigation - Fixed Bottom Style but actually top tabs */
+        .tab-bar {
+            display: flex;
+            background: rgba(21, 21, 21, 0.98);
+            backdrop-filter: blur(20px);
+            margin: 8px 16px;
+            border-radius: 40px;
+            padding: 4px;
+            gap: 4px;
+            flex-shrink: 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 10px 4px;
+            border-radius: 36px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
             font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        /* Navigation */
-        .nav-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 32px);
-            max-width: 448px;
-            background: rgba(21, 21, 21, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 24px;
-            padding: 12px;
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-tabs {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-item {
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            padding: 8px 12px;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-secondary);
-            font-size: 0.7rem;
-            font-weight: 600;
-            border: none;
-            background: transparent;
-            font-family: inherit;
-            flex: 1;
         }
 
-        .nav-item.active {
-            color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .nav-item i {
-            font-size: 1.3rem;
+        .tab-btn i {
+            font-size: 1.2rem;
             font-style: normal;
         }
 
-        /* Sections */
-        .section {
-            display: none;
-            animation: fadeIn 0.4s ease-out;
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            color: var(--bg-dark);
         }
 
-        .section.active {
+        /* Content Area - Scrollable but with fixed height */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 16px 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .content-area::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .content-area::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .content-area::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 3px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active-tab {
             display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Section Headers */
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-primary);
+        /* Premium Cards - Compact */
+        .premium-card {
+            background: rgba(21, 21, 21, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .section-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
-            border-radius: 12px;
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            gap: 8px;
+            color: var(--primary-gold);
         }
 
         /* Forms */
         .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            font-weight: 600;
+            margin-bottom: 12px;
         }
 
         .form-input, .form-textarea, .form-select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             background: var(--bg-dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
+            border-radius: 14px;
             color: var(--text-primary);
             font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            font-size: 0.9rem;
             outline: none;
         }
 
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        .form-textarea {
+            min-height: 70px;
+            resize: none;
         }
 
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary-gold);
         }
 
         /* Buttons */
         .btn-primary {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
             border: none;
             border-radius: 14px;
             color: var(--bg-dark);
             font-family: inherit;
-            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(212, 175, 55, 0.5);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
         .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--primary-gold);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 10px;
+            border-radius: 12px;
             color: var(--primary-gold);
-            padding: 12px 20px;
-            border-radius: 10px;
             font-family: inherit;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            text-align: center;
         }
 
-        .btn-secondary:hover {
+        /* Quick Add Grid */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .quick-item {
+            background: var(--bg-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 10px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-item:active {
+            transform: scale(0.96);
             background: rgba(212, 175, 55, 0.1);
         }
 
-        .btn-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            background: var(--bg-card);
-            color: var(--primary-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
+        .quick-icon {
             font-size: 1.2rem;
+            display: block;
         }
 
-        .btn-icon:hover {
-            background: var(--primary-gold);
-            color: var(--bg-dark);
+        .quick-label {
+            font-size: 0.65rem;
+            font-weight: 600;
         }
 
         /* Lists */
         .items-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            max-height: 280px;
+            overflow-y: auto;
         }
 
         .item-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 16px;
+            background: var(--bg-dark);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s;
-            animation: slideIn 0.4s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .item-card:hover {
-            border-color: rgba(212, 175, 55, 0.3);
-            transform: translateX(-4px);
+            border-right: 3px solid var(--primary-gold);
         }
 
         .item-info h4 {
-            color: var(--text-primary);
+            font-size: 0.85rem;
             margin-bottom: 4px;
-            font-weight: 600;
-            font-size: 0.95rem;
         }
 
         .item-info p {
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            font-size: 0.8rem;
         }
 
         .item-amount {
-            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--accent-rose);
-        }
-
-        .item-amount.income {
-            color: var(--success);
+            color: var(--primary-gold);
+            font-size: 0.9rem;
         }
 
         .delete-btn {
             background: rgba(239, 68, 68, 0.1);
             border: none;
-            color: var(--danger);
-            width: 32px;
-            height: 32px;
+            padding: 6px 10px;
             border-radius: 8px;
+            color: var(--danger);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            margin-right: 8px;
+            font-size: 0.7rem;
         }
 
-        .delete-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .stat-box {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-box::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-dark));
-        }
-
-        .stat-value {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        /* Progress Bars */
-        .progress-container {
-            margin: 12px 0;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--bg-dark);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-light));
-            border-radius: 4px;
-            transition: width 0.6s ease;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        /* Mood Tracker */
+        /* Mood Grid */
         .mood-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .mood-btn {
             aspect-ratio: 1;
+            background: var(--bg-dark);
             border: 2px solid rgba(212, 175, 55, 0.2);
-            background: var(--bg-card);
             border-radius: 12px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.2s;
         }
 
-        .mood-btn:hover, .mood-btn.selected {
+        .mood-btn.selected {
             border-color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.1);
-            transform: scale(1.1);
-        }
-
-        /* Calendar Heatmap */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-top: 16px;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .calendar-day.empty {
-            background: transparent;
-        }
-
-        .calendar-day.has-data {
             background: rgba(212, 175, 55, 0.2);
-            color: var(--primary-gold);
+            transform: scale(1.05);
         }
 
-        .calendar-day.level-1 { background: rgba(212, 175, 55, 0.3); }
-        .calendar-day.level-2 { background: rgba(212, 175, 55, 0.5); }
-        .calendar-day.level-3 { background: rgba(212, 175, 55, 0.7); }
-        .calendar-day.level-4 { background: var(--primary-gold); color: var(--bg-dark); }
-
-        /* Badges */
-        .badges-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .badge-item {
-            background: var(--bg-card);
-            border: 2px solid rgba(212, 175, 55, 0.1);
-            border-radius: 16px;
-            padding: 16px 8px;
-            text-align: center;
-            transition: all 0.3s;
-            opacity: 0.5;
-            filter: grayscale(1);
-        }
-
-        .badge-item.unlocked {
-            opacity: 1;
-            filter: grayscale(0);
-            border-color: var(--primary-gold);
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-        }
-
-        .badge-icon {
-            font-size: 2rem;
+        /* Goal Cards */
+        .goal-item {
+            background: var(--bg-dark);
+            border-radius: 14px;
+            padding: 12px;
             margin-bottom: 8px;
-        }
-
-        .badge-name {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .badge-desc {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-        }
-
-        /* Goals */
-        .goal-card {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
         }
 
         .goal-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .goal-title {
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .goal-amount {
-            color: var(--primary-gold);
-            font-weight: 700;
-        }
-
-        /* AI Insights */
-        .insight-card {
-            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(45, 212, 191, 0.05));
-            border: 1px solid rgba(167, 139, 250, 0.2);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .insight-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .insight-content h4 {
-            color: var(--accent-purple);
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-        }
-
-        .insight-content p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* Zakat Calculator */
-        .zakat-result {
-            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
-            color: var(--bg-dark);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            margin-top: 16px;
-        }
-
-        .zakat-amount {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 8px 0;
-        }
-
-        /* Quick Add Buttons */
-        .quick-add-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .quick-add-btn {
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
-            padding: 12px 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
-            color: var(--text-primary);
-        }
-
-        .quick-add-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-            border-color: var(--primary-gold);
-            transform: translateY(-2px);
-        }
-
-        .quick-add-icon {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .quick-add-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        /* Streak Counter */
-        .streak-display {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .streak-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--warning);
-            line-height: 1;
-        }
-
-        .streak-text {
-            text-align: right;
-        }
-
-        .streak-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .streak-subtitle {
-            color: var(--warning);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* Challenge Card */
-        .challenge-card {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), transparent);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .challenge-card.active {
-            border-color: var(--success);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
-        }
-
-        .challenge-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 8px;
         }
 
-        .challenge-title {
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
         }
 
-        .challenge-reward {
-            background: var(--success);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-light));
+            width: 0%;
+            transition: width 0.3s;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: var(--text-secondary);
         }
 
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        /* Toggle Switch */
-        .toggle-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .toggle-label {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .toggle-switch {
-            width: 50px;
-            height: 28px;
-            background: var(--bg-dark);
-            border-radius: 14px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .toggle-switch.active {
-            background: var(--primary-gold);
-            border-color: var(--primary-gold);
-        }
-
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            right: 2px;
-            transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .toggle-switch.active::after {
-            right: 26px;
-        }
-
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-gold-dark);
-            border-radius: 3px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
+        /* Toast */
+        .toast-message {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            color: var(--bg-dark);
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
             z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            white-space: nowrap;
         }
 
-        .modal.active {
-            display: flex;
+        /* Progress Circle */
+        .xp-progress {
+            margin-top: 8px;
         }
 
-        .modal-content {
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 24px;
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
+        .xp-text {
+            font-size: 0.7rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 4px;
         }
 
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
+        /* Insight Card */
+        .insight-card {
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 8px;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 10px;
         }
 
         /* Responsive */
         @media (max-width: 480px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .logo {
-                font-size: 2.2rem;
-            }
-            
-            .mood-grid {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 6px;
-            }
-            
-            .badges-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .tab-btn span { display: none; }
+            .tab-btn i { font-size: 1.4rem; }
+            .tab-btn { padding: 8px 4px; }
+            .premium-header { padding: 12px 16px 8px; }
+            .logo { font-size: 1.5rem; }
         }
 
-        /* Utility Classes */
         .text-gold { color: var(--primary-gold); }
-        .text-success { color: var(--success); }
-        .text-danger { color: var(--danger); }
-        .text-warning { color: var(--warning); }
-        .text-purple { color: var(--accent-purple); }
-        .mb-1 { margin-bottom: 8px; }
-        .mb-2 { margin-bottom: 16px; }
-        .mt-1 { margin-top: 8px; }
-        .mt-2 { margin-top: 16px; }
+        .text-sm { font-size: 0.75rem; }
+        .mt-1 { margin-top: 6px; }
+        .mb-1 { margin-bottom: 6px; }
         .flex { display: flex; }
         .justify-between { justify-content: space-between; }
-        .items-center { align-items: center; }
         .gap-2 { gap: 8px; }
-        .text-sm { font-size: 0.85rem; }
-        .text-xs { font-size: 0.75rem; }
-        .font-bold { font-weight: 700; }
-        .text-secondary { color: var(--text-secondary); }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="floating-particles" id="particles"></div>
+<div class="bg-gradient"></div>
 
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
+<div class="app-container">
+    <!-- Fixed Header -->
+    <div class="premium-header">
+        <div class="greeting-row">
             <h1 class="logo">مروة</h1>
-            <div class="user-greeting">
-                <span>أهلاً ميرو</span>
-                <span id="userLevel" class="level-badge">⭐ المستوى 1</span>
+            <i class="crown-icon">👑</i>
+        </div>
+        <div class="user-greeting">
+            مرحباً <span class="highlight-name">ميرو</span> ✨
+        </div>
+        
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-badge">
+                <div class="stat-value" id="totalSpend">0</div>
+                <div class="stat-label">إجمالي المصروفات</div>
             </div>
-            <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);" id="currentDate"></div>
-        </header>
+            <div class="stat-badge">
+                <div class="stat-value" id="todayMood">--</div>
+                <div class="stat-label">مزاج اليوم</div>
+            </div>
+            <div class="stat-badge">
+                <div class="stat-value" id="streakCount">0</div>
+                <div class="stat-label">أيام متتالية</div>
+            </div>
+        </div>
+        
+        <!-- XP Progress -->
+        <div class="xp-progress">
+            <div class="xp-text">
+                <span>المستوى <span id="userLevel">1</span></span>
+                <span id="xpText">0/100 XP</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="xpBar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
 
-        <!-- Quick Stats -->
-        <div class="quick-stats">
-            <div class="quick-stat" onclick="switchTab('spending')">
-                <div class="quick-stat-icon">💰</div>
-                <div class="quick-stat-value" id="quickTotal">0</div>
-                <div class="quick-stat-label">المصاريف</div>
+    <!-- Tab Navigation -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="home"><i>🏠</i><span>الرئيسية</span></button>
+        <button class="tab-btn" data-tab="spend"><i>💰</i><span>مصروف</span></button>
+        <button class="tab-btn" data-tab="mood"><i>😊</i><span>مزاج</span></button>
+        <button class="tab-btn" data-tab="goals"><i>🎯</i><span>أهداف</span></button>
+        <button class="tab-btn" data-tab="more"><i>⋮</i><span>المزيد</span></button>
+    </div>
+
+    <!-- Scrollable Content Area -->
+    <div class="content-area">
+        <!-- HOME TAB -->
+        <div id="home" class="tab-content active-tab">
+            <div class="premium-card">
+                <div class="card-title">✨ اقتباس اليوم</div>
+                <p id="dailyQuote" style="font-style: italic; color: var(--primary-gold-light); line-height: 1.5;">"الادخار هو أساس الثروة"</p>
             </div>
-            <div class="quick-stat" onclick="switchTab('mood')">
-                <div class="quick-stat-icon">😊</div>
-                <div class="quick-stat-value" id="quickMood">--</div>
-                <div class="quick-stat-label">المزاج</div>
+
+            <div class="premium-card">
+                <div class="card-title">⚡ إضافة سريعة</div>
+                <div class="quick-grid">
+                    <div class="quick-item" onclick="quickAdd('قهوة', 25)"><span class="quick-icon">☕</span><span class="quick-label">قهوة 25</span></div>
+                    <div class="quick-item" onclick="quickAdd('غداء', 60)"><span class="quick-icon">🍽️</span><span class="quick-label">غداء 60</span></div>
+                    <div class="quick-item" onclick="quickAdd('مواصلات', 15)"><span class="quick-icon">🚗</span><span class="quick-label">مواصلات 15</span></div>
+                    <div class="quick-item" onclick="quickAdd('مشروبات', 20)"><span class="quick-icon">🥤</span><span class="quick-label">مشروبات 20</span></div>
+                </div>
             </div>
-            <div class="quick-stat" onclick="switchTab('goals')">
-                <div class="quick-stat-icon">🎯</div>
-                <div class="quick-stat-value" id="quickGoals">0%</div>
-                <div class="quick-stat-label">الأهداف</div>
+
+            <div class="premium-card">
+                <div class="card-title">🧠 نصائح ذكية</div>
+                <div id="insightsPreview">
+                    <div class="insight-card">
+                        <div>💡</div>
+                        <div style="flex:1"><p class="text-sm">سجل مصروفاتك لتحصل على تحليلات مخصصة ونصائح للتوفير</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-title">📊 آخر المصروفات</div>
+                <div id="recentSpendings" class="items-list" style="max-height: 180px;"></div>
             </div>
         </div>
 
-        <!-- HOME SECTION -->
-        <section id="home" class="section active">
-            <!-- Streak Display -->
-            <div class="glass-card">
-                <div class="streak-display">
-                    <div class="streak-number" id="streakCount">0</div>
-                    <div class="streak-text">
-                        <div class="streak-label">يوم متتالي</div>
-                        <div class="streak-subtitle">🔥 الاستمرارية</div>
-                    </div>
+        <!-- SPEND TAB -->
+        <div id="spend" class="tab-content">
+            <div class="premium-card">
+                <div class="card-title">➕ إضافة مصروف</div>
+                <div class="form-group">
+                    <input type="text" id="spendDesc" class="form-input" placeholder="الوصف">
                 </div>
-                
-                <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="text-sm">التقدم نحو المستوى التالي</span>
-                        <span class="text-sm text-gold" id="xpText">0/100 XP</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="xpBar" style="width: 0%"></div>
-                    </div>
+                <div class="form-group">
+                    <input type="number" id="spendAmount" class="form-input" placeholder="المبلغ (جنيه مصري)" step="0.5">
                 </div>
+                <div class="form-group">
+                    <select id="spendCategory" class="form-select">
+                        <option value="طعام">🍽️ طعام</option>
+                        <option value="مواصلات">🚗 مواصلات</option>
+                        <option value="تسوق">🛍️ تسوق</option>
+                        <option value="ترفيه">🎬 ترفيه</option>
+                        <option value="أخرى">📦 أخرى</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="addSpending()">✨ إضافة المصروف</button>
             </div>
 
-            <!-- Daily Quote -->
-            <div class="glass-card" style="text-align: center; background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);">
-                <div style="font-size: 2rem; margin-bottom: 12px;">✨</div>
-                <p id="dailyQuote" style="font-style: italic; color: var(--primary-gold-light); line-height: 1.8; font-size: 0.95rem;">
-                    "الادخار ليس مقدار ما تكسبه، بل مقدار ما تحتفظ به."
-                </p>
-                <p style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">اقتباس اليوم</p>
+            <div class="premium-card">
+                <div class="card-title">📋 سجل المصروفات</div>
+                <div id="spendingsList" class="items-list" style="max-height: 350px;"></div>
             </div>
+        </div>
 
-            <!-- AI Insights Preview -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🤖</span>
-                    تحليلات ذكية
-                </h2>
-                <div id="aiInsightsList">
-                    <div class="insight-card">
-                        <div class="insight-icon">💡</div>
-                        <div class="insight-content">
-                            <h4>ابدأ رحلتك</h4>
-                            <p>سجل أول مصروف لك لتحصل على تحليلات مخصصة ونصائح ذكية لتوفير المال.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">⚡</span>
-                    إضافة سريعة
-                </h2>
-                <div class="quick-add-grid">
-                    <button class="quick-add-btn" onclick="quickAddSpending('☕ قهوة', 15)">
-                        <span class="quick-add-icon">☕</span>
-                        <span class="quick-add-label">قهوة 15</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAddSpending('🍽️ غداء', 30)">
-                        <span class="quick-add-icon">🍽️</span>
-                        <span class="quick-add-label">غداء 30</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAddSpending('🚗 مواصلات', 20)">
-                        <span class="quick-add-icon">🚗</span>
-                        <span class="quick-add-label">مواصلات 20</span>
-                    </button>
-                    <button class="quick-add-btn" onclick="quickAddSpending('🛍️ تسوق', 50)">
-                        <span class="quick-add-icon">🛍️</span>
-                        <span class="quick-add-label">تسوق 50</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SPENDING SECTION -->
-        <section id="spending" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">💳</span>
-                    تسجيل مصروف
-                </h2>
-                
-                <form id="spendingForm" onsubmit="addSpending(event)">
-                    <div class="form-group">
-                        <label class="form-label">الوصف</label>
-                        <input type="text" class="form-input" id="spendingDesc" placeholder="مثال: مشتريات البقالة" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">المبلغ (ريال)</label>
-                        <input type="number" class="form-input" id="spendingAmount" placeholder="0.00" step="0.01" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">الفئة</label>
-                        <select class="form-select" id="spendingCategory">
-                            <option value="طعام">🍽️ طعام وشراب</option>
-                            <option value="تسوق">🛍️ تسوق</option>
-                            <option value="مواصلات">🚗 مواصلات</option>
-                            <option value="فواتير">💡 فواتير</option>
-                            <option value="ترفيه">🎬 ترفيه</option>
-                            <option value="صحة">🏥 صحة</option>
-                            <option value="تعليم">📚 تعليم</option>
-                            <option value="صدقة">🤲 صدقة/خير</option>
-                            <option value="أخرى">📦 أخرى</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">
-                        <span>إضافة المصروف</span>
-                        <span>✨</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Budget Status -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📊</span>
-                    ميزانية الشهر
-                </h2>
-                <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="text-sm">الإنفاق الحالي</span>
-                        <span class="text-sm text-gold" id="budgetText">0 / 3000 ر.س</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="budgetBar" style="width: 0%"></div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 8px; margin-top: 12px;">
-                    <button class="btn-secondary" style="flex: 1;" onclick="setBudget()">تعديل الميزانية</button>
-                    <button class="btn-secondary" style="flex: 1;" onclick="viewCategories()">الفئات</button>
-                </div>
-            </div>
-
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📋</span>
-                    سجل المصاريف
-                </h2>
-                <div id="spendingList" class="items-list">
-                    <div class="empty-state">
-                        <div class="empty-icon">💸</div>
-                        <p>لا توجد مصاريف مسجلة</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- MOOD & HABITS SECTION -->
-        <section id="mood" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🎭</span>
-                    كيف تشعر اليوم؟
-                </h2>
-                <div class="mood-grid" id="moodGrid">
+        <!-- MOOD TAB -->
+        <div id="mood" class="tab-content">
+            <div class="premium-card">
+                <div class="card-title">😊 كيف تشعر اليوم؟</div>
+                <div class="mood-grid">
                     <button class="mood-btn" onclick="selectMood('😊', 'سعيد')">😊</button>
                     <button class="mood-btn" onclick="selectMood('😌', 'هادئ')">😌</button>
-                    <button class="mood-btn" onclick="selectMood('🤔', 'تفكير')">🤔</button>
-                    <button class="mood-btn" onclick="selectMood('💪', 'محفز')">💪</button>
+                    <button class="mood-btn" onclick="selectMood('🤔', 'مفكر')">🤔</button>
+                    <button class="mood-btn" onclick="selectMood('💪', 'نشيط')">💪</button>
                     <button class="mood-btn" onclick="selectMood('😴', 'متعب')">😴</button>
                     <button class="mood-btn" onclick="selectMood('😤', 'متضايق')">😤</button>
                 </div>
-                
-                <form id="thoughtForm" onsubmit="addThought(event)">
-                    <div class="form-group">
-                        <textarea class="form-textarea" id="thoughtContent" placeholder="اكتب خواطرك هنا..." style="min-height: 80px;"></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">حفظ المزاج والخاطرة</button>
-                </form>
+                <div class="form-group">
+                    <textarea id="thoughtText" class="form-textarea" placeholder="دوّن خاطرك هنا..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="saveMood()">📝 حفظ المزاج والخاطرة</button>
             </div>
 
-            <!-- Mood Calendar -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📅</span>
-                    تقويم المزاج
-                </h2>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.8rem; color: var(--text-secondary);">
-                    <span>الأحد</span><span>الإثنين</span><span>الثلاثاء</span><span>الأربعاء</span><span>الخميس</span><span>الجمعة</span><span>السبت</span>
-                </div>
-                <div class="calendar-grid" id="moodCalendar">
-                    <!-- Generated by JS -->
-                </div>
-                <div style="display: flex; gap: 12px; margin-top: 16px; justify-content: center; font-size: 0.75rem;">
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        <div style="width: 12px; height: 12px; background: rgba(212, 175, 55, 0.3); border-radius: 3px;"></div>
-                        <span>يوم عادي</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        <div style="width: 12px; height: 12px; background: var(--primary-gold); border-radius: 3px;"></div>
-                        <span>يوم ممتاز</span>
-                    </div>
-                </div>
+            <div class="premium-card">
+                <div class="card-title">📅 تقويم المزاج</div>
+                <div id="moodCalendar" style="display: flex; gap: 4px; flex-wrap: wrap;"></div>
+                <div class="text-sm text-secondary mt-1" style="text-align: center;">الأيام السعيدة: <span id="happyCount">0</span></div>
             </div>
 
-            <!-- Mood Stats -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📈</span>
-                    تحليل المزاج
-                </h2>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-value" id="happyDays">0</div>
-                        <div class="stat-label">أيام سعيدة</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="moodStreak">0</div>
-                        <div class="stat-label">أفضل تسلسل</div>
-                    </div>
-                </div>
+            <div class="premium-card">
+                <div class="card-title">📝 خواطري</div>
+                <div id="thoughtsList" class="items-list" style="max-height: 200px;"></div>
             </div>
-        </section>
-
-        <!-- GOALS SECTION -->
-        <section id="goals" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🎯</span>
-                    هدف جديد
-                </h2>
-                <form id="goalForm" onsubmit="addGoal(event)">
-                    <div class="form-group">
-                        <label class="form-label">اسم الهدف</label>
-                        <input type="text" class="form-input" id="goalName" placeholder="مثال: رحلة دبي" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">المبلغ المستهدف (ريال)</label>
-                        <input type="number" class="form-input" id="goalTarget" placeholder="5000" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">المدة (شهور)</label>
-                        <input type="number" class="form-input" id="goalMonths" placeholder="6" required>
-                    </div>
-                    <button type="submit" class="btn-primary">إنشاء الهدف 🚀</button>
-                </form>
-            </div>
-
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🏆</span>
-                    أهدافي
-                </h2>
-                <div id="goalsList">
-                    <div class="empty-state">
-                        <div class="empty-icon">🎯</div>
-                        <p>لا توجد أهداف بعد</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ZAKAT SECTION -->
-        <section id="zakat" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🤲</span>
-                    حاسبة الزكاة
-                </h2>
-                <form id="zakatForm" onsubmit="calculateZakat(event)">
-                    <div class="form-group">
-                        <label class="form-label">المدخرات والنقد</label>
-                        <input type="number" class="form-input" id="zakatCash" placeholder="0.00" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">الذهب (بالجرام)</label>
-                        <input type="number" class="form-input" id="zakatGold" placeholder="0" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">الفضة (بالجرام)</label>
-                        <input type="number" class="form-input" id="zakatSilver" placeholder="0" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">الأسهم والاستثمارات</label>
-                        <input type="number" class="form-input" id="zakatStocks" placeholder="0.00" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">الديون المستحقة عليك</label>
-                        <input type="number" class="form-input" id="zakatDebts" placeholder="0.00" step="0.01">
-                    </div>
-                    <button type="submit" class="btn-primary">حساب الزكاة 🧮</button>
-                </form>
-
-                <div id="zakatResult" style="display: none;" class="zakat-result">
-                    <div style="font-size: 0.9rem; opacity: 0.9;">مبلغ الزكاة المستحق</div>
-                    <div class="zakat-amount" id="zakatAmount">0 ر.س</div>
-                    <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 8px;">
-                        نصاب الذهب: 85 جرام | نصاب الفضة: 595 جرام
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charity Tracker -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">❤️</span>
-                    سجل الصدقات
-                </h2>
-                <form onsubmit="addCharity(event)">
-                    <div style="display: flex; gap: 8px;">
-                        <input type="number" class="form-input" id="charityAmount" placeholder="المبلغ" style="flex: 1;" required>
-                        <button type="submit" class="btn-primary" style="width: auto; padding: 0 20px;">+</button>
-                    </div>
-                </form>
-                <div class="mt-2" style="display: flex; justify-content: space-between; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; margin-top: 12px;">
-                    <span class="text-sm">إجمالي الصدقات هذا الشهر:</span>
-                    <span class="text-sm font-bold text-success" id="totalCharity">0 ر.س</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ACHIEVEMENTS SECTION -->
-        <section id="achievements" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🏅</span>
-                    الإنجازات
-                </h2>
-                <div class="badges-grid" id="badgesGrid">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-
-            <!-- Challenges -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">⚔️</span>
-                    التحديات الحالية
-                </h2>
-                <div id="challengesList">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- INSIGHTS SECTION -->
-        <section id="insights" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">🧠</span>
-                    تحليل الذكاء الاصطناعي
-                </h2>
-                <div id="detailedInsights">
-                    <div class="insight-card">
-                        <div class="insight-icon">📊</div>
-                        <div class="insight-content">
-                            <h4>نمط الإنفاق</h4>
-                            <p>سجل المزيد من البيانات لتحليل أنماط إنفاقك واكتشاف الفرص لتوفير المال.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Spending by Category -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📉</span>
-                    توزيع المصاريف
-                </h2>
-                <div id="categoryChart" style="margin-top: 16px;">
-                    <div class="empty-state" style="padding: 20px;">
-                        <p class="text-sm text-secondary">لا توجد بيانات كافية</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Weekly Pattern -->
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">📅</span>
-                    نمط الأسبوع
-                </h2>
-                <div id="weeklyPattern" style="margin-top: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 100px; gap: 8px;">
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 20%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">أحد</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 40%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">إثنين</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 60%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">ثلاثاء</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 30%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">أربعاء</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 80%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">خميس</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 100%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">جمعة</div>
-                        </div>
-                        <div style="flex: 1; text-align: center;">
-                            <div style="height: 50%; background: var(--primary-gold); border-radius: 4px 4px 0 0; opacity: 0.3;"></div>
-                            <div style="font-size: 0.7rem; margin-top: 4px;">سبت</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SETTINGS SECTION -->
-        <section id="settings" class="section">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <span class="section-icon">⚙️</span>
-                    الإعدادات
-                </h2>
-                
-                <div class="toggle-container">
-                    <span class="toggle-label">الوضع الليلي</span>
-                    <div class="toggle-switch active" onclick="toggleTheme()"></div>
-                </div>
-                
-                <div class="toggle-container">
-                    <span class="toggle-label">تفعيل الإشعارات</span>
-                    <div class="toggle-switch active" onclick="toggleNotifications()"></div>
-                </div>
-                
-                <div class="toggle-container">
-                    <span class="toggle-label">قفل التطبيق ببصمة الوجه</span>
-                    <div class="toggle-switch" onclick="toggleBiometric()"></div>
-                </div>
-                
-                <div class="toggle-container">
-                    <span class="toggle-label">المزامنة السحابية</span>
-                    <div class="toggle-switch" onclick="toggleCloud()"></div>
-                </div>
-
-                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <button class="btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="exportData()">
-                        📥 تصدير البيانات (Excel)
-                    </button>
-                    <button class="btn-secondary" style="width: 100%; color: var(--danger); border-color: var(--danger);" onclick="resetData()">
-                        🗑️ مسح جميع البيانات
-                    </button>
-                </div>
-            </div>
-
-            <div class="glass-card" style="text-align: center;">
-                <h3 style="color: var(--primary-gold); margin-bottom: 8px;">مروة</h3>
-                <p style="color: var(--text-secondary); font-size: 0.85rem;">الإصدار 2.0 - النسخة الكاملة</p>
-                <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 8px;">صنع بحب لميرو ❤️</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="nav-container">
-        <div class="nav-tabs">
-            <button class="nav-item active" onclick="switchTab('home')">
-                <i>🏠</i>
-                <span>الرئيسية</span>
-            </button>
-            <button class="nav-item" onclick="switchTab('spending')">
-                <i>💰</i>
-                <span>المصاريف</span>
-            </button>
-            <button class="nav-item" onclick="switchTab('mood')">
-                <i>😊</i>
-                <span>المزاج</span>
-            </button>
-            <button class="nav-item" onclick="switchTab('goals')">
-                <i>🎯</i>
-                <span>الأهداف</span>
-            </button>
-            <button class="nav-item" onclick="switchTab('zakat')">
-                <i>🤲</i>
-                <span>الزكاة</span>
-            </button>
-            <button class="nav-item" onclick="showMore()">
-                <i>⋮</i>
-                <span>المزيد</span>
-            </button>
         </div>
-    </nav>
 
-    <!-- More Menu Modal -->
-    <div class="modal" id="moreModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">المزيد</h3>
-                <button class="close-btn" onclick="closeModal()">×</button>
+        <!-- GOALS TAB -->
+        <div id="goals" class="tab-content">
+            <div class="premium-card">
+                <div class="card-title">🎯 هدف جديد</div>
+                <div class="form-group">
+                    <input type="text" id="goalName" class="form-input" placeholder="اسم الهدف">
+                </div>
+                <div class="form-group">
+                    <input type="number" id="goalTarget" class="form-input" placeholder="المبلغ المستهدف (جنيه)">
+                </div>
+                <button class="btn-primary" onclick="addGoal()">🚀 إنشاء الهدف</button>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <button class="btn-secondary" style="text-align: right; padding: 16px;" onclick="switchTab('achievements'); closeModal();">
-                    🏅 الإنجازات
-                </button>
-                <button class="btn-secondary" style="text-align: right; padding: 16px;" onclick="switchTab('insights'); closeModal();">
-                    🧠 التحليلات
-                </button>
-                <button class="btn-secondary" style="text-align: right; padding: 16px;" onclick="switchTab('settings'); closeModal();">
-                    ⚙️ الإعدادات
-                </button>
+
+            <div class="premium-card">
+                <div class="card-title">🏆 أهدافي</div>
+                <div id="goalsList" class="items-list"></div>
+            </div>
+        </div>
+
+        <!-- MORE TAB -->
+        <div id="more" class="tab-content">
+            <div class="premium-card">
+                <div class="card-title">🤲 الزكاة والصدقة</div>
+                <div class="form-group">
+                    <input type="number" id="zakatAmount" class="form-input" placeholder="المبلغ للزكاة (جنيه)">
+                </div>
+                <button class="btn-primary" onclick="calculateZakat()">💚 حساب الزكاة</button>
+                <div id="zakatResult" class="mt-1 text-gold text-sm" style="text-align: center;"></div>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-title">🏅 الإنجازات</div>
+                <div id="badgesList" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-title">⚙️ الإعدادات</div>
+                <button class="btn-secondary" style="width: 100%; margin-bottom: 8px;" onclick="exportData()">📥 تصدير البيانات</button>
+                <button class="btn-secondary" style="width: 100%;" onclick="resetData()">🗑️ مسح جميع البيانات</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // Data Management
-        let data = {
-            spendings: [],
-            thoughts: [],
-            goals: [],
-            moods: [],
-            charity: [],
-            settings: {
-                budget: 3000,
-                theme: 'dark',
-                notifications: true,
-                biometric: false,
-                cloud: false
-            },
-            user: {
-                name: 'ميرو',
-                level: 1,
-                xp: 0,
-                streak: 0,
-                lastActive: null
-            },
-            badges: [
-                { id: 'first_step', name: 'البداية', desc: 'سجل أول مصروف', icon: '👣', unlocked: false },
-                { id: 'saver', name: 'المدخر', desc: 'وفر 1000 ر.س', icon: '💰', unlocked: false },
-                { id: 'consistent', name: 'المثابر', desc: '7 أيام متتالية', icon: '🔥', unlocked: false },
-                { id: 'thinker', name: 'المفكر', desc: 'اكتب 10 خواطر', icon: '📝', unlocked: false },
-                { id: 'generous', name: 'الكريم', desc: 'تصدق بـ 500 ر.س', icon: '🤲', unlocked: false },
-                { id: 'planner', name: 'المخطط', desc: 'حقق هدفاً', icon: '🎯', unlocked: false }
-            ],
-            challenges: [
-                { id: 'no_spend', title: 'تحدي عدم الإنفاق', desc: 'لا تنفق ليوم كامل', reward: '50 XP', active: true, progress: 0 },
-                { id: 'save_week', title: 'أسبوع التوفير', desc: 'وفر 20% من دخلك', reward: '100 XP', active: false, progress: 0 }
-            ]
-        };
+<script>
+    // Data Storage
+    let appData = {
+        spendings: [],
+        moods: [],
+        thoughts: [],
+        goals: [],
+        user: { level: 1, xp: 0, streak: 0, lastActive: null },
+        badges: { firstSpend: false, fiveSpends: false, threeMoods: false }
+    };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            loadData();
-            updateDate();
-            createParticles();
-            checkStreak();
-            renderAll();
-            updateAIInsights();
-            startNotificationCheck();
+    let selectedMood = null;
+    let selectedMoodLabel = '';
+
+    // Load/Save
+    function loadData() {
+        const saved = localStorage.getItem('marwa_egp_data');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            appData = { ...appData, ...parsed };
+        }
+        checkStreak();
+        updateUI();
+    }
+
+    function saveData() {
+        localStorage.setItem('marwa_egp_data', JSON.stringify(appData));
+        updateUI();
+    }
+
+    // XP System
+    function addXP(amount) {
+        appData.user.xp += amount;
+        const required = appData.user.level * 100;
+        if (appData.user.xp >= required) {
+            appData.user.level++;
+            appData.user.xp -= required;
+            showToast(`🎉 ترقية! المستوى ${appData.user.level}`);
+        }
+        saveData();
+    }
+
+    // Streak Check
+    function checkStreak() {
+        const today = new Date().toDateString();
+        const last = appData.user.lastActive;
+        if (last) {
+            const lastDate = new Date(last);
+            const diff = Math.floor((new Date() - lastDate) / (1000 * 60 * 60 * 24));
+            if (diff === 1) {
+                appData.user.streak++;
+                addXP(5);
+            } else if (diff > 1) {
+                appData.user.streak = 1;
+            }
+        } else {
+            appData.user.streak = 1;
+        }
+        appData.user.lastActive = new Date().toISOString();
+    }
+
+    // Spending Functions
+    function addSpending() {
+        const desc = document.getElementById('spendDesc').value.trim();
+        const amount = parseFloat(document.getElementById('spendAmount').value);
+        const category = document.getElementById('spendCategory').value;
+
+        if (!desc || isNaN(amount) || amount <= 0) {
+            showToast('يرجى إدخال وصف ومبلغ صحيح');
+            return;
+        }
+
+        appData.spendings.unshift({
+            id: Date.now(),
+            desc, amount, category,
+            date: new Date().toISOString()
         });
 
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
-                container.appendChild(particle);
-            }
+        addXP(10);
+        
+        if (!appData.badges.firstSpend) {
+            appData.badges.firstSpend = true;
+            showToast('🏅 إنجاز جديد: أول مصروف!');
+        }
+        if (appData.spendings.length >= 5 && !appData.badges.fiveSpends) {
+            appData.badges.fiveSpends = true;
+            showToast('🏅 إنجاز: 5 مصروفات!');
         }
 
-        function updateDate() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('ar-SA', options);
+        document.getElementById('spendDesc').value = '';
+        document.getElementById('spendAmount').value = '';
+        saveData();
+        showToast('✨ تم إضافة المصروف بنجاح');
+    }
+
+    function quickAdd(desc, amount) {
+        appData.spendings.unshift({
+            id: Date.now(),
+            desc, amount, category: 'سريع',
+            date: new Date().toISOString()
+        });
+        addXP(5);
+        saveData();
+        showToast(`تم إضافة ${desc} بـ ${amount} جنيه`);
+    }
+
+    function deleteSpending(id) {
+        appData.spendings = appData.spendings.filter(s => s.id !== id);
+        saveData();
+        showToast('تم الحذف');
+    }
+
+    // Mood Functions
+    function selectMood(emoji, label) {
+        selectedMood = emoji;
+        selectedMoodLabel = label;
+        document.querySelectorAll('#mood .mood-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+    }
+
+    function saveMood() {
+        const thought = document.getElementById('thoughtText').value.trim();
+        
+        if (!selectedMood && !thought) {
+            showToast('اختر مزاجاً أو اكتب خاطرة');
+            return;
         }
 
-        // Data Persistence
-        function loadData() {
-            const saved = localStorage.getItem('marwa_data');
-            if (saved) {
-                data = JSON.parse(saved);
-            }
-        }
+        const moodEntry = {
+            id: Date.now(),
+            mood: selectedMood || '😐',
+            moodLabel: selectedMoodLabel || 'عادي',
+            thought: thought || '',
+            date: new Date().toISOString()
+        };
 
-        function saveData() {
-            localStorage.setItem('marwa_data', JSON.stringify(data));
+        appData.moods.unshift(moodEntry);
+        if (thought) appData.thoughts.unshift(moodEntry);
+        
+        addXP(15);
+        
+        if (appData.moods.length >= 3 && !appData.badges.threeMoods) {
+            appData.badges.threeMoods = true;
+            showToast('🏅 إنجاز: 3 أيام متابعة للمزاج!');
         }
+        
+        document.getElementById('thoughtText').value = '';
+        document.querySelectorAll('#mood .mood-btn').forEach(btn => btn.classList.remove('selected'));
+        selectedMood = null;
+        saveData();
+        showToast('تم حفظ مزاجك!');
+    }
 
-        // Navigation
-        function switchTab(tabName) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            if (tabName !== 'achievements' && tabName !== 'insights' && tabName !== 'settings') {
-                event.target.closest('.nav-item').classList.add('active');
-            }
-            
-            if (tabName === 'achievements') renderBadges();
-            if (tabName === 'insights') updateDetailedInsights();
-            if (tabName === 'mood') renderMoodCalendar();
-            
-            window.scrollTo(0, 0);
+    // Goal Functions
+    function addGoal() {
+        const name = document.getElementById('goalName').value.trim();
+        const target = parseFloat(document.getElementById('goalTarget').value);
+        
+        if (!name || isNaN(target) || target <= 0) {
+            showToast('أدخل اسم الهدف والمبلغ المستهدف');
+            return;
         }
+        
+        appData.goals.push({
+            id: Date.now(),
+            name, target, saved: 0,
+            date: new Date().toISOString()
+        });
+        
+        document.getElementById('goalName').value = '';
+        document.getElementById('goalTarget').value = '';
+        saveData();
+        showToast('✨ تم إنشاء الهدف');
+    }
 
-        function showMore() {
-            document.getElementById('moreModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('moreModal').classList.remove('active');
-        }
-
-        // Spending Functions
-        function addSpending(e) {
-            e.preventDefault();
-            const desc = document.getElementById('spendingDesc').value;
-            const amount = parseFloat(document.getElementById('spendingAmount').value);
-            const category = document.getElementById('spendingCategory').value;
-            
-            const spending = {
-                id: Date.now(),
-                desc,
-                amount,
-                category,
-                date: new Date().toISOString()
-            };
-            
-            data.spendings.unshift(spending);
-            saveData();
-            
-            addXP(10);
-            checkBadges();
-            
-            document.getElementById('spendingForm').reset();
-            renderSpendings();
-            updateQuickStats();
-            updateBudget();
-            updateAIInsights();
-            
-            showNotification('تم إضافة المصروف! +10 XP');
-        }
-
-        function quickAddSpending(desc, amount) {
-            const spending = {
-                id: Date.now(),
-                desc,
-                amount,
-                category: 'سريع',
-                date: new Date().toISOString()
-            };
-            
-            data.spendings.unshift(spending);
-            saveData();
-            addXP(5);
-            
-            renderSpendings();
-            updateQuickStats();
-            updateBudget();
-            
-            showNotification(`تم: ${desc} بـ ${amount} ر.س`);
-        }
-
-        function deleteSpending(id) {
-            if (confirm('هل أنت متأكد من الحذف؟')) {
-                data.spendings = data.spendings.filter(s => s.id !== id);
+    function addToGoal(id) {
+        const amount = parseFloat(prompt('المبلغ المضاف للهدف (جنيه):'));
+        if (!isNaN(amount) && amount > 0) {
+            const goal = appData.goals.find(g => g.id === id);
+            if (goal) {
+                goal.saved = Math.min(goal.saved + amount, goal.target);
+                if (goal.saved >= goal.target) {
+                    showToast('🎉 مبروك! حققت هدفك!');
+                    addXP(50);
+                }
                 saveData();
-                renderSpendings();
-                updateQuickStats();
-                updateBudget();
             }
         }
+    }
 
-        function renderSpendings() {
-            const list = document.getElementById('spendingList');
-            if (data.spendings.length === 0) {
-                list.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">💸</div>
-                        <p>لا توجد مصاريف مسجلة</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            list.innerHTML = data.spendings.slice(0, 10).map(item => `
+    function deleteGoal(id) {
+        if (confirm('حذف الهدف؟')) {
+            appData.goals = appData.goals.filter(g => g.id !== id);
+            saveData();
+        }
+    }
+
+    // Zakat
+    function calculateZakat() {
+        const amount = parseFloat(document.getElementById('zakatAmount').value);
+        if (isNaN(amount) || amount <= 0) {
+            showToast('أدخل المبلغ لحساب الزكاة');
+            return;
+        }
+        const zakat = amount * 0.025;
+        document.getElementById('zakatResult').innerHTML = `💚 الزكاة المستحقة: ${zakat.toFixed(2)} جنيه`;
+    }
+
+    // Export/Reset
+    function exportData() {
+        const dataStr = JSON.stringify(appData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `marwa_data_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        showToast('تم تصدير البيانات');
+    }
+
+    function resetData() {
+        if (confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع!')) {
+            localStorage.removeItem('marwa_egp_data');
+            location.reload();
+        }
+    }
+
+    // UI Rendering
+    function updateUI() {
+        // Stats
+        const total = appData.spendings.reduce((s, p) => s + p.amount, 0);
+        document.getElementById('totalSpend').textContent = total.toFixed(0);
+        document.getElementById('streakCount').textContent = appData.user.streak;
+        
+        const todayMoodEntry = appData.moods.find(m => new Date(m.date).toDateString() === new Date().toDateString());
+        document.getElementById('todayMood').textContent = todayMoodEntry ? todayMoodEntry.mood : '--';
+        
+        // XP
+        const required = appData.user.level * 100;
+        const xpPercent = (appData.user.xp / required) * 100;
+        document.getElementById('xpBar').style.width = xpPercent + '%';
+        document.getElementById('xpText').textContent = `${appData.user.xp}/${required} XP`;
+        document.getElementById('userLevel').textContent = appData.user.level;
+        
+        // Spendings List
+        const spendContainer = document.getElementById('spendingsList');
+        if (appData.spendings.length === 0) {
+            spendContainer.innerHTML = '<div class="empty-state">لا توجد مصروفات</div>';
+        } else {
+            spendContainer.innerHTML = appData.spendings.slice(0, 15).map(s => `
                 <div class="item-card">
-                    <div style="display: flex; align-items: center; flex: 1;">
-                        <div class="item-info" style="flex: 1;">
-                            <h4>${item.desc}</h4>
-                            <p>${item.category} • ${formatDate(item.date)}</p>
-                        </div>
-                        <div class="item-amount">${item.amount.toFixed(2)} ر.س</div>
+                    <div class="item-info">
+                        <h4>${s.desc}</h4>
+                        <p>${s.category} • ${new Date(s.date).toLocaleDateString('ar-EG')}</p>
                     </div>
-                    <button class="delete-btn" onclick="deleteSpending(${item.id})">🗑️</button>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="item-amount">${s.amount.toFixed(2)} ج.م</div>
+                        <button class="delete-btn" onclick="deleteSpending(${s.id})">🗑️</button>
+                    </div>
                 </div>
             `).join('');
         }
-
-        // Mood Functions
-        let selectedMood = null;
-        let selectedMoodLabel = '';
-
-        function selectMood(emoji, label) {
-            selectedMood = emoji;
-            selectedMoodLabel = label;
-            document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-            event.target.classList.add('selected');
-        }
-
-        function addThought(e) {
-            e.preventDefault();
-            const content = document.getElementById('thoughtContent').value;
-            
-            if (!selectedMood && !content) {
-                showNotification('اختر مزاجاً أو اكتب خاطرة');
-                return;
-            }
-            
-            const thought = {
-                id: Date.now(),
-                mood: selectedMood || '😐',
-                moodLabel: selectedMoodLabel || 'عادي',
-                content: content || 'لا يوجد وصف',
-                date: new Date().toISOString()
-            };
-            
-            data.moods.unshift(thought);
-            data.thoughts.push(thought);
-            saveData();
-            
-            addXP(15);
-            checkBadges();
-            
-            document.getElementById('thoughtForm').reset();
-            document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-            selectedMood = null;
-            
-            renderMoodCalendar();
-            updateQuickStats();
-            showNotification('تم حفظ مزاجك! +15 XP');
-        }
-
-        function renderMoodCalendar() {
-            const calendar = document.getElementById('moodCalendar');
-            const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
-            const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getDay();
-            
-            let html = '';
-            
-            // Empty cells
-            for (let i = 0; i < firstDay; i++) {
-                html += '<div class="calendar-day empty"></div>';
-            }
-            
-            // Days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = new Date(new Date().getFullYear(), new Date().getMonth(), day).toDateString();
-                const dayMoods = data.moods.filter(m => new Date(m.date).toDateString() === dateStr);
-                
-                let level = '';
-                if (dayMoods.length > 0) {
-                    const happy = dayMoods.some(m => ['😊', '💪', '🥰'].includes(m.mood));
-                    if (dayMoods.length >= 3) level = 'level-4';
-                    else if (dayMoods.length === 2) level = 'level-3';
-                    else if (happy) level = 'level-2';
-                    else level = 'level-1';
-                }
-                
-                html += `<div class="calendar-day ${level}" title="${dayMoods.map(m => m.mood).join(' ')}">${day}</div>`;
-            }
-            
-            calendar.innerHTML = html;
-            
-            // Update stats
-            const happyDays = data.moods.filter(m => ['😊', '💪'].includes(m.mood)).length;
-            document.getElementById('happyDays').textContent = happyDays;
-            document.getElementById('moodStreak').textContent = calculateMoodStreak();
-        }
-
-        function calculateMoodStreak() {
-            if (data.moods.length === 0) return 0;
-            let streak = 0;
-            const today = new Date();
-            for (let i = 0; i < 365; i++) {
-                const checkDate = new Date(today);
-                checkDate.setDate(checkDate.getDate() - i);
-                const hasEntry = data.moods.some(m => new Date(m.date).toDateString() === checkDate.toDateString());
-                if (hasEntry) streak++;
-                else if (i > 0) break;
-            }
-            return streak;
-        }
-
-        // Goals Functions
-        function addGoal(e) {
-            e.preventDefault();
-            const goal = {
-                id: Date.now(),
-                name: document.getElementById('goalName').value,
-                target: parseFloat(document.getElementById('goalTarget').value),
-                months: parseInt(document.getElementById('goalMonths').value),
-                saved: 0,
-                created: new Date().toISOString()
-            };
-            
-            data.goals.push(goal);
-            saveData();
-            
-            document.getElementById('goalForm').reset();
-            renderGoals();
-            updateQuickStats();
-            
-            showNotification('تم إنشاء الهدف! 🎯');
-        }
-
-        function renderGoals() {
-            const list = document.getElementById('goalsList');
-            if (data.goals.length === 0) {
-                list.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">🎯</div>
-                        <p>لا توجد أهداف بعد</p>
+        
+        // Recent Spendings (Home)
+        const recentContainer = document.getElementById('recentSpendings');
+        if (appData.spendings.length === 0) {
+            recentContainer.innerHTML = '<div class="empty-state">لا توجد مصروفات حديثة</div>';
+        } else {
+            recentContainer.innerHTML = appData.spendings.slice(0, 5).map(s => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <h4>${s.desc}</h4>
+                        <p>${s.amount.toFixed(2)} ج.م</p>
                     </div>
-                `;
-                return;
-            }
-            
-            list.innerHTML = data.goals.map(goal => {
-                const progress = (goal.saved / goal.target) * 100;
-                const monthly = goal.target / goal.months;
-                
+                </div>
+            `).join('');
+        }
+        
+        // Thoughts List
+        const thoughtsContainer = document.getElementById('thoughtsList');
+        if (appData.thoughts.length === 0) {
+            thoughtsContainer.innerHTML = '<div class="empty-state">لا توجد خواطر</div>';
+        } else {
+            thoughtsContainer.innerHTML = appData.thoughts.slice(0, 10).map(t => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <h4>${t.mood} ${t.moodLabel}</h4>
+                        <p>${t.thought.substring(0, 50)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Mood Calendar
+        const last7Days = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            last7Days.push(d.toDateString());
+        }
+        const calendarHtml = last7Days.map(dayStr => {
+            const hasMood = appData.moods.find(m => new Date(m.date).toDateString() === dayStr);
+            const dayNum = new Date(dayStr).getDate();
+            return `<div style="width: 12%; text-align: center; padding: 6px; background: ${hasMood ? 'rgba(212,175,55,0.2)' : 'rgba(255,255,255,0.05)'}; border-radius: 8px;">${dayNum}<br>${hasMood ? hasMood.mood : ''}</div>`;
+        }).join('');
+        document.getElementById('moodCalendar').innerHTML = calendarHtml;
+        
+        const happyCount = appData.moods.filter(m => ['😊', '💪'].includes(m.mood)).length;
+        document.getElementById('happyCount').textContent = happyCount;
+        
+        // Goals List
+        const goalsContainer = document.getElementById('goalsList');
+        if (appData.goals.length === 0) {
+            goalsContainer.innerHTML = '<div class="empty-state">لا توجد أهداف</div>';
+        } else {
+            goalsContainer.innerHTML = appData.goals.map(g => {
+                const percent = (g.saved / g.target) * 100;
                 return `
-                    <div class="goal-card">
+                    <div class="goal-item">
                         <div class="goal-header">
-                            <div class="goal-title">${goal.name}</div>
-                            <div class="goal-amount">${goal.saved.toFixed(0)} / ${goal.target} ر.س</div>
+                            <span class="text-gold">${g.name}</span>
+                            <span>${g.saved.toFixed(0)}/${g.target} ج.م</span>
                         </div>
-                        <div class="progress-bar" style="margin-bottom: 8px;">
-                            <div class="progress-fill" style="width: ${progress}%"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
-                            <span>التقدم: ${progress.toFixed(1)}%</span>
-                            <span>الشهري المطلوب: ${monthly.toFixed(0)} ر.س</span>
-                        </div>
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="btn-secondary" style="flex: 1; padding: 8px;" onclick="addToGoal(${goal.id})">إضافة مبلغ</button>
-                            <button class="delete-btn" onclick="deleteGoal(${goal.id})">🗑️</button>
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
+                        <div class="flex justify-between mt-1">
+                            <button class="delete-btn" onclick="addToGoal(${g.id})">+ إضافة</button>
+                            <button class="delete-btn" onclick="deleteGoal(${g.id})">🗑️ حذف</button>
                         </div>
                     </div>
                 `;
             }).join('');
         }
-
-        function addToGoal(goalId) {
-            const amount = prompt('المبلغ المضاف للهدف:');
-            if (amount && !isNaN(amount)) {
-                const goal = data.goals.find(g => g.id === goalId);
-                if (goal) {
-                    goal.saved += parseFloat(amount);
-                    if (goal.saved >= goal.target) {
-                        goal.saved = goal.target;
-                        unlockBadge('planner');
-                        showNotification('🎉 مبروك! حققت هدفك!');
-                    }
-                    saveData();
-                    renderGoals();
-                    updateQuickStats();
-                }
-            }
-        }
-
-        function deleteGoal(id) {
-            if (confirm('حذف الهدف؟')) {
-                data.goals = data.goals.filter(g => g.id !== id);
-                saveData();
-                renderGoals();
-            }
-        }
-
-        // Zakat Functions
-        function calculateZakat(e) {
-            e.preventDefault();
-            const cash = parseFloat(document.getElementById('zakatCash').value) || 0;
-            const gold = parseFloat(document.getElementById('zakatGold').value) || 0;
-            const silver = parseFloat(document.getElementById('zakatSilver').value) || 0;
-            const stocks = parseFloat(document.getElementById('zakatStocks').value) || 0;
-            const debts = parseFloat(document.getElementById('zakatDebts').value) || 0;
-            
-            // Prices (approximate)
-            const goldPrice = 250; // per gram
-            const silverPrice = 3; // per gram
-            
-            const goldValue = gold * goldPrice;
-            const silverValue = silver * silverPrice;
-            const total = cash + goldValue + silverValue + stocks - debts;
-            
-            // Nisab (85g gold)
-            const nisab = 85 * goldPrice;
-            
-            let zakat = 0;
-            if (total >= nisab) {
-                zakat = total * 0.025;
-            }
-            
-            document.getElementById('zakatAmount').textContent = zakat.toFixed(2) + ' ر.س';
-            document.getElementById('zakatResult').style.display = 'block';
-            
-            if (zakat > 0) {
-                addXP(20);
-                showNotification('تم حساب الزكاة! +20 XP');
-            }
-        }
-
-        function addCharity(e) {
-            e.preventDefault();
-            const amount = parseFloat(document.getElementById('charityAmount').value);
-            
-            data.charity.push({
-                amount,
-                date: new Date().toISOString()
-            });
-            saveData();
-            
-            addXP(15);
-            checkBadges();
-            
-            document.getElementById('charityAmount').value = '';
-            updateCharityTotal();
-            showNotification('جزاك الله خيراً! +15 XP');
-        }
-
-        function updateCharityTotal() {
-            const total = data.charity.reduce((sum, c) => sum + c.amount, 0);
-            document.getElementById('totalCharity').textContent = total.toFixed(2) + ' ر.س';
-        }
-
-        // Gamification
-        function addXP(amount) {
-            data.user.xp += amount;
-            
-            // Level up logic
-            const requiredXP = data.user.level * 100;
-            if (data.user.xp >= requiredXP) {
-                data.user.level++;
-                data.user.xp -= requiredXP;
-                showNotification(`🎉 ترقية! المستوى ${data.user.level}`);
-            }
-            
-            saveData();
-            updateUserStats();
-        }
-
-        function checkStreak() {
-            const today = new Date().toDateString();
-            const lastActive = data.user.lastActive;
-            
-            if (lastActive) {
-                const lastDate = new Date(lastActive);
-                const diff = Math.floor((new Date() - lastDate) / (1000 * 60 * 60 * 24));
-                
-                if (diff === 1) {
-                    data.user.streak++;
-                    addXP(5 * data.user.streak);
-                } else if (diff > 1) {
-                    data.user.streak = 1;
-                }
-            } else {
-                data.user.streak = 1;
-            }
-            
-            data.user.lastActive = new Date().toISOString();
-            saveData();
-            updateUserStats();
-        }
-
-        function updateUserStats() {
-            document.getElementById('userLevel').textContent = `⭐ المستوى ${data.user.level}`;
-            document.getElementById('streakCount').textContent = data.user.streak;
-            
-            const requiredXP = data.user.level * 100;
-            const progress = (data.user.xp / requiredXP) * 100;
-            document.getElementById('xpBar').style.width = progress + '%';
-            document.getElementById('xpText').textContent = `${data.user.xp}/${requiredXP} XP`;
-        }
-
-        function checkBadges() {
-            const totalSpent = data.spendings.reduce((sum, s) => sum + s.amount, 0);
-            const totalSaved = data.goals.reduce((sum, g) => sum + g.saved, 0);
-            const totalCharity = data.charity.reduce((sum, c) => sum + c.amount, 0);
-            
-            if (data.spendings.length >= 1) unlockBadge('first_step');
-            if (totalSaved >= 1000) unlockBadge('saver');
-            if (data.user.streak >= 7) unlockBadge('consistent');
-            if (data.thoughts.length >= 10) unlockBadge('thinker');
-            if (totalCharity >= 500) unlockBadge('generous');
-        }
-
-        function unlockBadge(badgeId) {
-            const badge = data.badges.find(b => b.id === badgeId);
-            if (badge && !badge.unlocked) {
-                badge.unlocked = true;
-                saveData();
-                showNotification(`🏅 إنجاز جديد: ${badge.name}!`);
-            }
-        }
-
-        function renderBadges() {
-            const grid = document.getElementById('badgesGrid');
-            grid.innerHTML = data.badges.map(badge => `
-                <div class="badge-item ${badge.unlocked ? 'unlocked' : ''}">
-                    <div class="badge-icon">${badge.icon}</div>
-                    <div class="badge-name">${badge.name}</div>
-                    <div class="badge-desc">${badge.desc}</div>
+        
+        // Badges
+        const badgesHtml = [];
+        if (appData.badges.firstSpend) badgesHtml.push('<div class="stat-badge" style="padding: 8px 12px;">🏅 أول مصروف</div>');
+        if (appData.badges.fiveSpends) badgesHtml.push('<div class="stat-badge" style="padding: 8px 12px;">🏅 5 مصروفات</div>');
+        if (appData.badges.threeMoods) badgesHtml.push('<div class="stat-badge" style="padding: 8px 12px;">🏅 3 أيام مزاج</div>');
+        if (appData.user.streak >= 7) badgesHtml.push('<div class="stat-badge" style="padding: 8px 12px;">🔥 7 أيام متتالية</div>');
+        document.getElementById('badgesList').innerHTML = badgesHtml.length ? badgesHtml.join('') : '<div class="text-secondary">لا توجد إنجازات بعد</div>';
+        
+        // Insights
+        if (appData.spendings.length > 0) {
+            const totalSpend = appData.spendings.reduce((s, p) => s + p.amount, 0);
+            const avgSpend = totalSpend / appData.spendings.length;
+            document.getElementById('insightsPreview').innerHTML = `
+                <div class="insight-card">
+                    <div>📊</div>
+                    <div><p class="text-sm">متوسط المصروف: ${avgSpend.toFixed(1)} ج.م<br>استمر في التوفير!</p></div>
                 </div>
-            `).join('');
-            
-            // Render challenges
-            const challengesList = document.getElementById('challengesList');
-            challengesList.innerHTML = data.challenges.map(c => `
-                <div class="challenge-card ${c.active ? 'active' : ''}">
-                    <div class="challenge-header">
-                        <div class="challenge-title">${c.active ? '🔥' : '⏸️'} ${c.title}</div>
-                        <div class="challenge-reward">${c.reward}</div>
-                    </div>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 8px;">${c.desc}</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${c.progress}%"></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // AI Insights
-        function updateAIInsights() {
-            if (data.spendings.length < 3) return;
-            
-            const insights = [];
-            const total = data.spendings.reduce((sum, s) => sum + s.amount, 0);
-            const avg = total / data.spendings.length;
-            
-            // Weekend spending pattern
-            const weekendSpending = data.spendings.filter(s => {
-                const day = new Date(s.date).getDay();
-                return day === 5 || day === 6; // Friday, Saturday
-            });
-            
-            if (weekendSpending.length > 0) {
-                const weekendTotal = weekendSpending.reduce((sum, s) => sum + s.amount, 0);
-                const weekendAvg = weekendTotal / weekendSpending.length;
-                
-                if (weekendAvg > avg * 1.3) {
-                    insights.push({
-                        icon: '📅',
-                        title: 'نمط نهاية الأسبوع',
-                        text: 'تنفق أكثر في العطلات بنسبة 30%. حاول وضع ميزانية خاصة لأيام الجمعة والسبت.'
-                    });
-                }
-            }
-            
-            // Category insight
-            const categories = {};
-            data.spendings.forEach(s => {
-                categories[s.category] = (categories[s.category] || 0) + s.amount;
-            });
-            
-            const topCategory = Object.entries(categories).sort((a, b) => b[1] - a[1])[0];
-            if (topCategory && topCategory[1] > total * 0.4) {
-                insights.push({
-                    icon: '💡',
-                    title: 'أكبر فئة إنفاق',
-                    text: `${topCategory[0]} تمثل ${((topCategory[1]/total)*100).toFixed(0)}% من مصاريفك. راجع هل يمكن تقليلها؟`
-                });
-            }
-            
-            // Mood correlation
-            if (data.moods.length > 5) {
-                const stressedDays = data.moods.filter(m => ['😤', '😴'].includes(m.mood));
-                if (stressedDays.length > data.moods.length * 0.3) {
-                    insights.push({
-                        icon: '🧠',
-                        title: 'المزاج والمال',
-                        text: 'تبدو متوتراً مؤخراً. الضغط النفسي قد يؤدي لإنفاق مندفع. خذ نفساً عميقاً قبل كل عملية شراء.'
-                    });
-                }
-            }
-            
-            const container = document.getElementById('aiInsightsList');
-            if (insights.length > 0) {
-                container.innerHTML = insights.map(i => `
-                    <div class="insight-card">
-                        <div class="insight-icon">${i.icon}</div>
-                        <div class="insight-content">
-                            <h4>${i.title}</h4>
-                            <p>${i.text}</p>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function updateDetailedInsights() {
-            updateAIInsights();
-            
-            // Category chart
-            const categories = {};
-            data.spendings.forEach(s => {
-                categories[s.category] = (categories[s.category] || 0) + s.amount;
-            });
-            
-            const total = Object.values(categories).reduce((a, b) => a + b, 0);
-            const chart = document.getElementById('categoryChart');
-            
-            if (total > 0) {
-                chart.innerHTML = Object.entries(categories).sort((a, b) => b[1] - a[1]).map(([cat, amount]) => {
-                    const pct = (amount / total) * 100;
-                    return `
-                        <div style="margin-bottom: 12px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.85rem;">
-                                <span>${cat}</span>
-                                <span>${pct.toFixed(1)}%</span>
-                            </div>
-                            <div class="progress-bar" style="height: 6px;">
-                                <div class="progress-fill" style="width: ${pct}%; opacity: 0.8;"></div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-            
-            // Weekly pattern
-            const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-            const dayTotals = new Array(7).fill(0);
-            
-            data.spendings.forEach(s => {
-                const day = new Date(s.date).getDay();
-                dayTotals[day] += s.amount;
-            });
-            
-            const maxDay = Math.max(...dayTotals);
-            const weeklyContainer = document.getElementById('weeklyPattern');
-            weeklyContainer.innerHTML = days.map((day, idx) => {
-                const height = maxDay > 0 ? (dayTotals[idx] / maxDay) * 100 : 0;
-                const isHigh = height > 70;
-                return `
-                    <div style="flex: 1; text-align: center;">
-                        <div style="height: ${Math.max(height, 10)}%; background: ${isHigh ? 'var(--danger)' : 'var(--primary-gold)'}; border-radius: 4px 4px 0 0; transition: height 0.5s; min-height: 4px;"></div>
-                        <div style="font-size: 0.65rem; margin-top: 4px; color: var(--text-secondary);">${day}</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Budget Functions
-        function setBudget() {
-            const newBudget = prompt('الميزانية الشهرية الجديدة:', data.settings.budget);
-            if (newBudget && !isNaN(newBudget)) {
-                data.settings.budget = parseFloat(newBudget);
-                saveData();
-                updateBudget();
-                showNotification('تم تحديث الميزانية');
-            }
-        }
-
-        function updateBudget() {
-            const total = data.spendings
-                .filter(s => new Date(s.date).getMonth() === new Date().getMonth())
-                .reduce((sum, s) => sum + s.amount, 0);
-            
-            const pct = Math.min((total / data.settings.budget) * 100, 100);
-            document.getElementById('budgetBar').style.width = pct + '%';
-            document.getElementById('budgetText').textContent = `${total.toFixed(0)} / ${data.settings.budget} ر.س`;
-            
-            if (pct > 90) {
-                document.getElementById('budgetBar').style.background = 'var(--danger)';
-            } else if (pct > 75) {
-                document.getElementById('budgetBar').style.background = 'var(--warning)';
-            }
-        }
-
-        // Quick Stats
-        function updateQuickStats() {
-            const total = data.spendings.reduce((sum, s) => sum + s.amount, 0);
-            document.getElementById('quickTotal').textContent = total.toFixed(0);
-            
-            const todayMood = data.moods.find(m => new Date(m.date).toDateString() === new Date().toDateString());
-            document.getElementById('quickMood').textContent = todayMood ? todayMood.mood : '--';
-            
-            const totalGoals = data.goals.reduce((sum, g) => sum + (g.saved / g.target) * 100, 0) / (data.goals.length || 1);
-            document.getElementById('quickGoals').textContent = totalGoals.toFixed(0) + '%';
-        }
-
-        // Settings
-        function toggleTheme() {
-            event.target.classList.toggle('active');
-            showNotification('الوضع الليلي مفعل');
-        }
-
-        function toggleNotifications() {
-            event.target.classList.toggle('active');
-            showNotification('الإشعارات ' + (event.target.classList.contains('active') ? 'مفعلة' : 'معطلة'));
-        }
-
-        function toggleBiometric() {
-            event.target.classList.toggle('active');
-            showNotification('قفل البصمة ' + (event.target.classList.contains('active') ? 'مفعل' : 'معطل'));
-        }
-
-        function toggleCloud() {
-            event.target.classList.toggle('active');
-            showNotification('المزامنة السحابية ' + (event.target.classList.contains('active') ? 'مفعلة' : 'معطلة'));
-        }
-
-        function exportData() {
-            const csv = [
-                ['التاريخ', 'الوصف', 'المبلغ', 'الفئة'],
-                ...data.spendings.map(s => [s.date, s.desc, s.amount, s.category])
-            ].map(row => row.join(',')).join('\n');
-            
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'marwa_data.csv';
-            a.click();
-            
-            showNotification('تم تصدير البيانات!');
-        }
-
-        function resetData() {
-            if (confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع!')) {
-                localStorage.removeItem('marwa_data');
-                location.reload();
-            }
-        }
-
-        // Utilities
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            const now = new Date();
-            const diff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-            
-            if (diff === 0) return 'اليوم';
-            if (diff === 1) return 'أمس';
-            if (diff < 7) return `منذ ${diff} أيام`;
-            
-            return date.toLocaleDateString('ar-SA', { month: 'short', day: 'numeric' });
-        }
-
-        function showNotification(message) {
-            const notif = document.createElement('div');
-            notif.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
-                color: var(--bg-dark);
-                padding: 16px 32px;
-                border-radius: 50px;
-                font-weight: 700;
-                z-index: 3000;
-                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-                animation: slideUp 0.3s ease-out;
-                font-size: 0.9rem;
             `;
-            notif.textContent = message;
-            document.body.appendChild(notif);
-            
-            setTimeout(() => {
-                notif.style.animation = 'slideDown 0.3s ease-out';
-                setTimeout(() => notif.remove(), 300);
-            }, 3000);
         }
+    }
 
-        function startNotificationCheck() {
-            // Check for budget warnings
-            setInterval(() => {
-                const total = data.spendings
-                    .filter(s => new Date(s.date).getMonth() === new Date().getMonth())
-                    .reduce((sum, s) => sum + s.amount, 0);
-                
-                if (total > data.settings.budget * 0.9 && total < data.settings.budget) {
-                    // Could show warning notification
-                }
-            }, 60000); // Check every minute
-        }
+    // Tab Switching
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
+        document.getElementById(tabId).classList.add('active-tab');
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.closest('.tab-btn').classList.add('active');
+    }
 
-        function renderAll() {
-            renderSpendings();
-            renderGoals();
-            renderMoodCalendar();
-            updateUserStats();
-            updateQuickStats();
-            updateBudget();
-            updateCharityTotal();
-            checkBadges();
-        }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
+            document.getElementById(tab).classList.add('active-tab');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
 
-        // Daily Quotes
-        const quotes = [
-            "الادخار ليس مقدار ما تكسبه، بل مقدار ما تحتفظ به.",
-            "من ترك شيئاً لله عوضه الله خيراً منه.",
-            "لا تؤجل عمل اليوم إلى الغد.",
-            "المال في يدك وليس في قلبك.",
-            "التخطيط اليوم يصنع الغد المشرق.",
-            "القناعة كنز لا يفنى.",
-            "من سار على الدرب وصل."
-        ];
+    // Toast
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
 
-        document.getElementById('dailyQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-    </script>
+    // Daily Quote
+    const quotes = [""الادخار هو أساس الثروة", "المال في يدك وليس في قلبك", "من ترك شيئاً لله عوضه", "القناعة كنز لا يفنى", "التخطيط يصنع الغد"];
+    document.getElementById('dailyQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Initialize
+    loadData();
+</script>
 </body>
 </html>
