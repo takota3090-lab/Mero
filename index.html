@@ -42,6 +42,14 @@
             z-index: 100;
         }
 
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
@@ -51,8 +59,26 @@
             color: transparent;
         }
 
+        .datetime {
+            text-align: left;
+            direction: ltr;
+            font-size: 0.7rem;
+            color: var(--gold);
+            font-weight: 600;
+            background: rgba(212, 175, 55, 0.15);
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .date-ar {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
         .greeting {
-            margin-top: 4px;
+            margin-top: 8px;
             font-size: 0.85rem;
             color: var(--text-dim);
         }
@@ -99,7 +125,7 @@
             padding: 4px;
             gap: 4px;
             position: sticky;
-            top: 95px;
+            top: 110px;
             z-index: 99;
         }
 
@@ -193,6 +219,35 @@
 
         input:focus, select:focus, textarea:focus {
             border-color: var(--gold);
+        }
+
+        /* Fixed Mood Dropdown - No Scrolling */
+        .mood-selector {
+            margin-bottom: 12px;
+        }
+
+        .mood-dropdown {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 14px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+        }
+
+        .mood-dropdown option {
+            background: var(--dark);
+            color: var(--text);
+            padding: 10px;
         }
 
         button {
@@ -292,33 +347,6 @@
 
         .delete-btn:active {
             transform: scale(0.95);
-        }
-
-        /* Mood Grid */
-        .mood-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .mood-btn {
-            aspect-ratio: 1;
-            background: var(--dark);
-            border: 2px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .mood-btn:active {
-            transform: scale(0.95);
-        }
-
-        .mood-btn.selected {
-            border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.2);
         }
 
         /* Goal Item */
@@ -425,13 +453,19 @@
             .stats {
                 gap: 8px;
             }
+            .datetime {
+                font-size: 0.6rem;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div class="logo">مروة</div>
+    <div class="header-top">
+        <div class="logo">مروة</div>
+        <div class="datetime" id="dateTimeDisplay"></div>
+    </div>
     <div class="greeting">مرحباً <span class="name">ميرو</span> ✨</div>
     <div class="stats">
         <div class="stat-card">
@@ -503,17 +537,22 @@
         </div>
     </div>
 
-    <!-- MOOD PANEL -->
+    <!-- MOOD PANEL - Using Dropdown Instead of Scrollable Grid -->
     <div id="mood" class="panel">
         <div class="card">
             <div class="card-title">😊 كيف تشعر اليوم؟</div>
-            <div class="mood-grid">
-                <button class="mood-btn" onclick="selectMood('😊', 'سعيد')">😊</button>
-                <button class="mood-btn" onclick="selectMood('😌', 'هادئ')">😌</button>
-                <button class="mood-btn" onclick="selectMood('🤔', 'مفكر')">🤔</button>
-                <button class="mood-btn" onclick="selectMood('💪', 'نشيط')">💪</button>
-                <button class="mood-btn" onclick="selectMood('😴', 'متعب')">😴</button>
-                <button class="mood-btn" onclick="selectMood('😤', 'متضايق')">😤</button>
+            <div class="mood-selector">
+                <select id="moodDropdown" class="mood-dropdown">
+                    <option value="">-- اختر مزاجك --</option>
+                    <option value="😊 سعيد">😊 سعيد</option>
+                    <option value="😌 هادئ">😌 هادئ</option>
+                    <option value="🤔 مفكر">🤔 مفكر</option>
+                    <option value="💪 نشيط">💪 نشيط</option>
+                    <option value="😴 متعب">😴 متعب</option>
+                    <option value="😤 متضايق">😤 متضايق</option>
+                    <option value="🥰 مغرم">🥰 مغرم</option>
+                    <option value="😎 واثق">😎 واثق</option>
+                </select>
             </div>
             <textarea id="thoughtText" placeholder="اكتب خاطرك هنا..."></textarea>
             <button onclick="saveMood()">📝 حفظ المزاج والخاطرة</button>
@@ -549,13 +588,11 @@
     let goals = [];
     let streak = 0;
     let lastActive = null;
-    let currentMood = null;
-    let currentMoodLabel = '';
 
     // Load data
     function loadData() {
         try {
-            const saved = localStorage.getItem('marwa_app_v2');
+            const saved = localStorage.getItem('marwa_app_v3');
             if (saved) {
                 const data = JSON.parse(saved);
                 spendings = data.spendings || [];
@@ -568,13 +605,26 @@
         } catch(e) { console.log(e); }
         checkStreak();
         updateUI();
+        updateDateTime();
     }
 
     function saveData() {
         const data = { spendings, moods, thoughts, goals, streak, lastActive };
-        localStorage.setItem('marwa_app_v2', JSON.stringify(data));
+        localStorage.setItem('marwa_app_v3', JSON.stringify(data));
         updateUI();
     }
+
+    // Update Date and Time
+    function updateDateTime() {
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const dateAr = now.toLocaleDateString('ar-EG', options);
+        const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('dateTimeDisplay').innerHTML = `${dateAr}<br>${timeStr}`;
+    }
+
+    // Update time every minute
+    setInterval(updateDateTime, 60000);
 
     // Streak
     function checkStreak() {
@@ -636,26 +686,30 @@
         }
     }
 
-    // Mood
-    function selectMood(emoji, label) {
-        currentMood = emoji;
-        currentMoodLabel = label;
-        document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-        event.target.classList.add('selected');
-    }
-
+    // Mood - Using Dropdown
     function saveMood() {
+        const moodSelect = document.getElementById('moodDropdown');
+        const selectedMood = moodSelect.value;
         const thought = document.getElementById('thoughtText').value.trim();
         
-        if (!currentMood && !thought) {
+        if (!selectedMood && !thought) {
             showToast('😊 اختر مزاجاً أو اكتب خاطرة');
             return;
         }
 
+        let moodEmoji = '😐';
+        let moodLabel = 'عادي';
+        
+        if (selectedMood) {
+            const parts = selectedMood.split(' ');
+            moodEmoji = parts[0];
+            moodLabel = parts[1] || 'عادي';
+        }
+
         const moodEntry = {
             id: Date.now(),
-            mood: currentMood || '😐',
-            moodLabel: currentMoodLabel || 'عادي',
+            mood: moodEmoji,
+            moodLabel: moodLabel,
             thought: thought || '',
             date: new Date().toISOString()
         };
@@ -665,10 +719,8 @@
             thoughts.unshift(moodEntry);
         }
 
+        document.getElementById('moodDropdown').value = '';
         document.getElementById('thoughtText').value = '';
-        document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-        currentMood = null;
-        currentMoodLabel = '';
         saveData();
         showToast('📝 تم حفظ المزاج والخاطرة');
     }
@@ -772,7 +824,7 @@
                     <div class="item-info">
                         <h4>${t.mood} ${t.moodLabel}</h4>
                         <p>${escapeHtml(t.thought.substring(0, 80))}${t.thought.length > 80 ? '...' : ''}</p>
-                        <p class="text-sm text-dim" style="color: var(--text-dim); margin-top: 4px;">${formatDate(t.date)}</p>
+                        <p class="text-sm" style="color: var(--text-dim); margin-top: 4px;">${formatDate(t.date)}</p>
                     </div>
                 </div>
             `).join('');
