@@ -22,7 +22,6 @@
             --text-dim: #A0A0A0;
             --danger: #EF4444;
             --success: #10B981;
-            --green-islamic: #2E7D32;
         }
 
         body {
@@ -36,7 +35,7 @@
         .header {
             background: rgba(10, 10, 18, 0.95);
             backdrop-filter: blur(20px);
-            padding: 16px 20px 12px;
+            padding: 12px 20px 10px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             position: sticky;
             top: 0;
@@ -52,7 +51,7 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             -webkit-background-clip: text;
@@ -63,24 +62,18 @@
         .datetime {
             text-align: left;
             direction: ltr;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--gold);
             font-weight: 600;
             background: rgba(212, 175, 55, 0.15);
-            padding: 4px 10px;
-            border-radius: 20px;
+            padding: 3px 8px;
+            border-radius: 16px;
             display: inline-block;
         }
 
-        .date-ar {
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            margin-top: 2px;
-        }
-
         .greeting {
-            margin-top: 8px;
-            font-size: 0.85rem;
+            margin-top: 6px;
+            font-size: 0.8rem;
             color: var(--text-dim);
         }
 
@@ -92,27 +85,27 @@
         /* Stats Row */
         .stats {
             display: flex;
-            gap: 12px;
-            margin-top: 12px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .stat-card {
             flex: 1;
             background: rgba(212, 175, 55, 0.12);
-            border-radius: 16px;
-            padding: 8px;
+            border-radius: 14px;
+            padding: 6px;
             text-align: center;
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .stat-number {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 800;
             color: var(--gold);
         }
 
         .stat-label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--text-dim);
         }
 
@@ -126,7 +119,7 @@
             padding: 4px;
             gap: 4px;
             position: sticky;
-            top: 110px;
+            top: 95px;
             z-index: 99;
         }
 
@@ -134,7 +127,7 @@
             flex: 1;
             background: transparent;
             border: none;
-            padding: 10px 4px;
+            padding: 8px 4px;
             border-radius: 36px;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
@@ -145,7 +138,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
         .tab.active {
@@ -183,68 +176,66 @@
         /* Cards */
         .card {
             background: rgba(21, 21, 21, 0.9);
-            border-radius: 20px;
-            padding: 16px;
+            border-radius: 18px;
+            padding: 14px;
             margin-bottom: 12px;
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
             color: var(--gold);
         }
 
-        /* Tasbeeh Counter */
+        /* Tasbeeh Counter - Compact Version */
         .tasbeeh-container {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(212, 175, 55, 0.05));
-            border-radius: 24px;
-            margin-top: 8px;
         }
 
         .tasbeeh-title {
-            font-size: 1.3rem;
-            font-weight: 800;
+            font-size: 0.9rem;
+            font-weight: 700;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
         }
 
         .tasbeeh-counter {
-            font-size: 4rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--gold);
             background: var(--dark);
-            padding: 20px;
-            border-radius: 60px;
-            margin: 20px 0;
+            padding: 8px 16px;
+            border-radius: 40px;
+            margin: 8px 0;
             font-family: monospace;
-            letter-spacing: 5px;
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            letter-spacing: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: inline-block;
+            min-width: 100px;
         }
 
         .tasbeeh-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
+            margin-bottom: 12px;
         }
 
         .tasbeeh-btn {
-            flex: 1;
-            padding: 14px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 50px;
+            border-radius: 40px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
             font-family: inherit;
@@ -266,9 +257,8 @@
         }
 
         .tasbeeh-phrases {
-            margin-top: 20px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -276,9 +266,9 @@
         .phrase-btn {
             background: rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.2s;
             color: var(--text);
@@ -292,19 +282,19 @@
         /* Forms */
         input, select, textarea {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             background: var(--dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--text);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         textarea {
-            min-height: 70px;
+            min-height: 60px;
             resize: vertical;
         }
 
@@ -314,33 +304,33 @@
 
         /* Mood Dropdown */
         .mood-selector {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .mood-dropdown {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             background: var(--dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--text);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
             background-repeat: no-repeat;
-            background-position: left 12px center;
+            background-position: left 10px center;
         }
 
         button {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--dark);
             font-family: inherit;
             font-weight: 700;
@@ -348,8 +338,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: transform 0.2s;
+            font-size: 0.85rem;
         }
 
         button:active {
@@ -365,7 +356,7 @@
         .list-item {
             background: var(--dark);
             border-radius: 12px;
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -374,29 +365,29 @@
         }
 
         .item-info h4 {
-            font-size: 0.85rem;
-            margin-bottom: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 3px;
         }
 
         .item-info p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-dim);
         }
 
         .item-amount {
             font-weight: 700;
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .delete-btn {
             background: rgba(239, 68, 68, 0.1);
             border: none;
-            padding: 6px 10px;
+            padding: 5px 8px;
             border-radius: 8px;
             color: var(--danger);
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             width: auto;
             transition: all 0.2s;
         }
@@ -409,22 +400,23 @@
         .goal-item {
             background: var(--dark);
             border-radius: 12px;
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 8px;
         }
 
         .goal-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
         }
 
         .progress-bar {
-            height: 6px;
+            height: 5px;
             background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .progress-fill {
@@ -436,8 +428,9 @@
 
         .empty {
             text-align: center;
-            padding: 30px 20px;
+            padding: 25px 15px;
             color: var(--text-dim);
+            font-size: 0.8rem;
         }
 
         .toast {
@@ -447,10 +440,10 @@
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: var(--dark);
-            padding: 10px 20px;
-            border-radius: 40px;
+            padding: 8px 16px;
+            border-radius: 30px;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             z-index: 2000;
             white-space: nowrap;
             max-width: 90%;
@@ -464,7 +457,7 @@
         }
 
         .text-sm {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         .text-gold {
@@ -472,16 +465,12 @@
         }
 
         .mt-1 {
-            margin-top: 6px;
-        }
-
-        .mb-1 {
-            margin-bottom: 6px;
+            margin-top: 5px;
         }
 
         /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
 
         ::-webkit-scrollbar-track {
@@ -490,7 +479,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--gold);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         @media (max-width: 480px) {
@@ -498,23 +487,27 @@
                 display: none;
             }
             .tab i {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
             .tab {
-                padding: 8px 4px;
+                padding: 6px 4px;
             }
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             .stats {
                 gap: 8px;
             }
             .datetime {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
             }
             .tasbeeh-counter {
-                font-size: 2.5rem;
-                padding: 15px;
+                font-size: 1.8rem;
+                padding: 6px 12px;
+            }
+            .phrase-btn {
+                padding: 4px 10px;
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -555,27 +548,25 @@
     <div id="home" class="panel active">
         <div class="card">
             <div class="card-title">✨ اقتباس اليوم</div>
-            <p id="dailyQuote" style="font-style: italic; color: var(--gold); font-size: 1rem;">"الادخار أساس الثروة"</p>
+            <p id="dailyQuote" style="font-style: italic; color: var(--gold); font-size: 0.9rem;">"الادخار أساس الثروة"</p>
         </div>
 
-        <!-- Tasbeeh Counter -->
+        <!-- Tasbeeh Counter - Compact Version -->
         <div class="card">
             <div class="tasbeeh-container">
                 <div class="tasbeeh-title">
-                    <span>🕋</span>
-                    <span>حاسبة التسبيح</span>
                     <span>📿</span>
+                    <span>حاسبة التسبيح</span>
+                    <span>🕋</span>
                 </div>
                 
-                <div class="tasbeeh-counter" id="tasbeehCount">0</div>
+                <div>
+                    <span class="tasbeeh-counter" id="tasbeehCount">0</span>
+                </div>
                 
                 <div class="tasbeeh-buttons">
-                    <button class="tasbeeh-btn btn-count" onclick="incrementTasbeeh()">
-                        <span>➕</span> تسبيحة
-                    </button>
-                    <button class="tasbeeh-btn btn-reset" onclick="resetTasbeeh()">
-                        <span>🔄</span> إعادة تعيين
-                    </button>
+                    <button class="tasbeeh-btn btn-count" onclick="incrementTasbeeh()">➕ تسبيحة</button>
+                    <button class="tasbeeh-btn btn-reset" onclick="resetTasbeeh()">🔄 إعادة</button>
                 </div>
                 
                 <div class="tasbeeh-phrases">
@@ -584,10 +575,6 @@
                     <button class="phrase-btn" onclick="addPhrase('الله أكبر')">الله أكبر</button>
                     <button class="phrase-btn" onclick="addPhrase('لا إله إلا الله')">لا إله إلا الله</button>
                     <button class="phrase-btn" onclick="addPhrase('أستغفر الله')">أستغفر الله</button>
-                </div>
-                
-                <div class="text-sm" style="text-align: center; margin-top: 12px; color: var(--text-dim);">
-                    اضغط على التسبيحة أو اختر عبارة
                 </div>
             </div>
         </div>
@@ -672,7 +659,7 @@
     // Load data
     function loadData() {
         try {
-            const saved = localStorage.getItem('marwa_app_v4');
+            const saved = localStorage.getItem('marwa_app_v5');
             if (saved) {
                 const data = JSON.parse(saved);
                 spendings = data.spendings || [];
@@ -692,7 +679,7 @@
 
     function saveData() {
         const data = { spendings, moods, thoughts, goals, streak, lastActive, tasbeehCounter };
-        localStorage.setItem('marwa_app_v4', JSON.stringify(data));
+        localStorage.setItem('marwa_app_v5', JSON.stringify(data));
         updateUI();
     }
 
@@ -702,18 +689,14 @@
         updateTasbeehDisplay();
         saveData();
         
-        // Vibrate on mobile if supported
         if (navigator.vibrate) {
-            navigator.vibrate(50);
+            navigator.vibrate(30);
         }
         
-        // Show encouragement at milestones
         if (tasbeehCounter === 33) {
             showToast('🌟 33 تسبيحة! بارك الله فيك');
         } else if (tasbeehCounter === 100) {
             showToast('🎉 100 تسبيحة! جزاك الله خيراً');
-        } else if (tasbeehCounter === 1000) {
-            showToast('🤲 ألف تسبيحة! اللهم تقبل');
         }
     }
 
@@ -727,7 +710,6 @@
     }
 
     function addPhrase(phrase) {
-        // Add the phrase as a thought automatically
         const phraseEntry = {
             id: Date.now(),
             mood: '📿',
@@ -739,16 +721,14 @@
         thoughts.unshift(phraseEntry);
         moods.unshift(phraseEntry);
         
-        // Also increment tasbeeh
         tasbeehCounter++;
         updateTasbeehDisplay();
         saveData();
         
-        showToast(`📿 ${phrase} + تسبيحة`);
+        showToast(`📿 ${phrase}`);
         
-        // Vibrate on mobile if supported
         if (navigator.vibrate) {
-            navigator.vibrate(50);
+            navigator.vibrate(30);
         }
     }
 
@@ -765,7 +745,6 @@
         document.getElementById('dateTimeDisplay').innerHTML = `${dateAr}<br>${timeStr}`;
     }
 
-    // Update time every minute
     setInterval(updateDateTime, 60000);
 
     // Streak
@@ -893,7 +872,7 @@
     }
 
     function deleteGoal(id) {
-        if (confirm('هل أنت متأكد من حذف هذا الهدف؟')) {
+        if (confirm('حذف الهدف؟')) {
             goals = goals.filter(g => g.id !== id);
             saveData();
             showToast('🗑️ تم حذف الهدف');
@@ -902,7 +881,6 @@
 
     // Update UI
     function updateUI() {
-        // Stats
         const total = spendings.reduce((s, p) => s + p.amount, 0);
         document.getElementById('totalSpend').innerText = total.toFixed(0);
         document.getElementById('streakCount').innerText = streak;
@@ -910,7 +888,6 @@
         const todayMood = moods.find(m => new Date(m.date).toDateString() === new Date().toDateString());
         document.getElementById('todayMood').innerText = todayMood ? todayMood.mood : '--';
 
-        // Spendings list
         const spendContainer = document.getElementById('spendList');
         if (spendings.length === 0) {
             spendContainer.innerHTML = '<div class="empty">📭 لا توجد مصروفات مسجلة</div>';
@@ -929,7 +906,6 @@
             `).join('');
         }
 
-        // Thoughts list
         const thoughtsContainer = document.getElementById('thoughtsList');
         if (thoughts.length === 0) {
             thoughtsContainer.innerHTML = '<div class="empty">📝 لا توجد خواطر مسجلة</div>';
@@ -939,13 +915,12 @@
                     <div class="item-info">
                         <h4>${t.mood} ${t.moodLabel}</h4>
                         <p>${escapeHtml(t.thought.substring(0, 80))}${t.thought.length > 80 ? '...' : ''}</p>
-                        <p class="text-sm" style="color: var(--text-dim); margin-top: 4px;">${formatDate(t.date)}</p>
+                        <p class="text-sm" style="color: var(--text-dim); margin-top: 3px;">${formatDate(t.date)}</p>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Goals list
         const goalsContainer = document.getElementById('goalsList');
         if (goals.length === 0) {
             goalsContainer.innerHTML = '<div class="empty">🎯 لا توجد أهداف</div>';
@@ -991,7 +966,6 @@
         });
     }
 
-    // Toast
     function showToast(msg) {
         const toast = document.createElement('div');
         toast.className = 'toast';
@@ -1022,7 +996,6 @@
         "التخطيط يصنع الغد",
         "من ترك شيئاً لله عوضه",
         "ابدأ صغيراً واحلم كبيراً",
-        "اليوم أفضل من الأمس",
         "الذكر طمأنينة للقلب",
         "استغفر الله إنه كان غفاراً"
     ];
