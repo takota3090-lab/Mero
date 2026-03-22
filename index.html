@@ -22,6 +22,7 @@
             --text-dim: #A0A0A0;
             --danger: #EF4444;
             --success: #10B981;
+            --green-islamic: #2E7D32;
         }
 
         body {
@@ -198,6 +199,96 @@
             color: var(--gold);
         }
 
+        /* Tasbeeh Counter */
+        .tasbeeh-container {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(212, 175, 55, 0.05));
+            border-radius: 24px;
+            margin-top: 8px;
+        }
+
+        .tasbeeh-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tasbeeh-counter {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--gold);
+            background: var(--dark);
+            padding: 20px;
+            border-radius: 60px;
+            margin: 20px 0;
+            font-family: monospace;
+            letter-spacing: 5px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .tasbeeh-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .tasbeeh-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .tasbeeh-btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-count {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+        }
+
+        .btn-reset {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .tasbeeh-phrases {
+            margin-top: 20px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .phrase-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text);
+        }
+
+        .phrase-btn:active {
+            transform: scale(0.95);
+            background: rgba(212, 175, 55, 0.3);
+        }
+
         /* Forms */
         input, select, textarea {
             width: 100%;
@@ -221,7 +312,7 @@
             border-color: var(--gold);
         }
 
-        /* Fixed Mood Dropdown - No Scrolling */
+        /* Mood Dropdown */
         .mood-selector {
             margin-bottom: 12px;
         }
@@ -242,12 +333,6 @@
             background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
             background-repeat: no-repeat;
             background-position: left 12px center;
-        }
-
-        .mood-dropdown option {
-            background: var(--dark);
-            color: var(--text);
-            padding: 10px;
         }
 
         button {
@@ -271,36 +356,7 @@
             transform: scale(0.98);
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-        }
-
-        /* Quick Add */
-        .quick-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .quick-item {
-            background: var(--dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
-            padding: 10px 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .quick-item:active {
-            transform: scale(0.96);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        /* Lists - Scrollable */
+        /* Lists */
         .list {
             max-height: 400px;
             overflow-y: auto;
@@ -456,6 +512,10 @@
             .datetime {
                 font-size: 0.6rem;
             }
+            .tasbeeh-counter {
+                font-size: 2.5rem;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -498,19 +558,38 @@
             <p id="dailyQuote" style="font-style: italic; color: var(--gold); font-size: 1rem;">"الادخار أساس الثروة"</p>
         </div>
 
+        <!-- Tasbeeh Counter -->
         <div class="card">
-            <div class="card-title">⚡ إضافة سريعة</div>
-            <div class="quick-grid">
-                <div class="quick-item" onclick="quickAdd('قهوة', 25)"><div style="font-size: 1.2rem;">☕</div><div class="text-sm">قهوة 25</div></div>
-                <div class="quick-item" onclick="quickAdd('غداء', 60)"><div style="font-size: 1.2rem;">🍽️</div><div class="text-sm">غداء 60</div></div>
-                <div class="quick-item" onclick="quickAdd('مواصلات', 15)"><div style="font-size: 1.2rem;">🚗</div><div class="text-sm">مواصلات 15</div></div>
-                <div class="quick-item" onclick="quickAdd('عصير', 10)"><div style="font-size: 1.2rem;">🥤</div><div class="text-sm">عصير 10</div></div>
+            <div class="tasbeeh-container">
+                <div class="tasbeeh-title">
+                    <span>🕋</span>
+                    <span>حاسبة التسبيح</span>
+                    <span>📿</span>
+                </div>
+                
+                <div class="tasbeeh-counter" id="tasbeehCount">0</div>
+                
+                <div class="tasbeeh-buttons">
+                    <button class="tasbeeh-btn btn-count" onclick="incrementTasbeeh()">
+                        <span>➕</span> تسبيحة
+                    </button>
+                    <button class="tasbeeh-btn btn-reset" onclick="resetTasbeeh()">
+                        <span>🔄</span> إعادة تعيين
+                    </button>
+                </div>
+                
+                <div class="tasbeeh-phrases">
+                    <button class="phrase-btn" onclick="addPhrase('سبحان الله')">سبحان الله</button>
+                    <button class="phrase-btn" onclick="addPhrase('الحمد لله')">الحمد لله</button>
+                    <button class="phrase-btn" onclick="addPhrase('الله أكبر')">الله أكبر</button>
+                    <button class="phrase-btn" onclick="addPhrase('لا إله إلا الله')">لا إله إلا الله</button>
+                    <button class="phrase-btn" onclick="addPhrase('أستغفر الله')">أستغفر الله</button>
+                </div>
+                
+                <div class="text-sm" style="text-align: center; margin-top: 12px; color: var(--text-dim);">
+                    اضغط على التسبيحة أو اختر عبارة
+                </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">📊 آخر المصروفات</div>
-            <div id="recentList" class="list" style="max-height: 300px;"></div>
         </div>
     </div>
 
@@ -537,7 +616,7 @@
         </div>
     </div>
 
-    <!-- MOOD PANEL - Using Dropdown Instead of Scrollable Grid -->
+    <!-- MOOD PANEL -->
     <div id="mood" class="panel">
         <div class="card">
             <div class="card-title">😊 كيف تشعر اليوم؟</div>
@@ -588,11 +667,12 @@
     let goals = [];
     let streak = 0;
     let lastActive = null;
+    let tasbeehCounter = 0;
 
     // Load data
     function loadData() {
         try {
-            const saved = localStorage.getItem('marwa_app_v3');
+            const saved = localStorage.getItem('marwa_app_v4');
             if (saved) {
                 const data = JSON.parse(saved);
                 spendings = data.spendings || [];
@@ -601,17 +681,79 @@
                 goals = data.goals || [];
                 streak = data.streak || 0;
                 lastActive = data.lastActive || null;
+                tasbeehCounter = data.tasbeehCounter || 0;
             }
         } catch(e) { console.log(e); }
         checkStreak();
         updateUI();
         updateDateTime();
+        updateTasbeehDisplay();
     }
 
     function saveData() {
-        const data = { spendings, moods, thoughts, goals, streak, lastActive };
-        localStorage.setItem('marwa_app_v3', JSON.stringify(data));
+        const data = { spendings, moods, thoughts, goals, streak, lastActive, tasbeehCounter };
+        localStorage.setItem('marwa_app_v4', JSON.stringify(data));
         updateUI();
+    }
+
+    // Tasbeeh Functions
+    function incrementTasbeeh() {
+        tasbeehCounter++;
+        updateTasbeehDisplay();
+        saveData();
+        
+        // Vibrate on mobile if supported
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+        
+        // Show encouragement at milestones
+        if (tasbeehCounter === 33) {
+            showToast('🌟 33 تسبيحة! بارك الله فيك');
+        } else if (tasbeehCounter === 100) {
+            showToast('🎉 100 تسبيحة! جزاك الله خيراً');
+        } else if (tasbeehCounter === 1000) {
+            showToast('🤲 ألف تسبيحة! اللهم تقبل');
+        }
+    }
+
+    function resetTasbeeh() {
+        if (confirm('هل تريد إعادة تعيين العداد؟')) {
+            tasbeehCounter = 0;
+            updateTasbeehDisplay();
+            saveData();
+            showToast('🔄 تم إعادة تعيين العداد');
+        }
+    }
+
+    function addPhrase(phrase) {
+        // Add the phrase as a thought automatically
+        const phraseEntry = {
+            id: Date.now(),
+            mood: '📿',
+            moodLabel: 'تسبيح',
+            thought: `${phrase}`,
+            date: new Date().toISOString()
+        };
+        
+        thoughts.unshift(phraseEntry);
+        moods.unshift(phraseEntry);
+        
+        // Also increment tasbeeh
+        tasbeehCounter++;
+        updateTasbeehDisplay();
+        saveData();
+        
+        showToast(`📿 ${phrase} + تسبيحة`);
+        
+        // Vibrate on mobile if supported
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+    }
+
+    function updateTasbeehDisplay() {
+        document.getElementById('tasbeehCount').innerText = tasbeehCounter;
     }
 
     // Update Date and Time
@@ -666,18 +808,6 @@
         showToast('✨ تم إضافة المصروف بنجاح');
     }
 
-    function quickAdd(desc, amount) {
-        spendings.unshift({
-            id: Date.now(),
-            desc: desc,
-            amount: amount,
-            category: 'سريع',
-            date: new Date().toISOString()
-        });
-        saveData();
-        showToast(`✅ تم إضافة ${desc} بـ ${amount} جنيه`);
-    }
-
     function deleteSpending(id) {
         if (confirm('هل أنت متأكد من الحذف؟')) {
             spendings = spendings.filter(s => s.id !== id);
@@ -686,7 +816,7 @@
         }
     }
 
-    // Mood - Using Dropdown
+    // Mood
     function saveMood() {
         const moodSelect = document.getElementById('moodDropdown');
         const selectedMood = moodSelect.value;
@@ -779,21 +909,6 @@
 
         const todayMood = moods.find(m => new Date(m.date).toDateString() === new Date().toDateString());
         document.getElementById('todayMood').innerText = todayMood ? todayMood.mood : '--';
-
-        // Recent spendings (home)
-        const recentContainer = document.getElementById('recentList');
-        if (spendings.length === 0) {
-            recentContainer.innerHTML = '<div class="empty">📭 لا توجد مصروفات</div>';
-        } else {
-            recentContainer.innerHTML = spendings.slice(0, 10).map(s => `
-                <div class="list-item">
-                    <div class="item-info">
-                        <h4>${escapeHtml(s.desc)}</h4>
-                        <p>${s.amount.toFixed(0)} جنيه • ${formatDate(s.date)}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
 
         // Spendings list
         const spendContainer = document.getElementById('spendList');
@@ -907,7 +1022,9 @@
         "التخطيط يصنع الغد",
         "من ترك شيئاً لله عوضه",
         "ابدأ صغيراً واحلم كبيراً",
-        "اليوم أفضل من الأمس"
+        "اليوم أفضل من الأمس",
+        "الذكر طمأنينة للقلب",
+        "استغفر الله إنه كان غفاراً"
     ];
     document.getElementById('dailyQuote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
 
