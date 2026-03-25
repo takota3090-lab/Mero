@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>مروة - مساعدك الشخصي</title>
+    <title>سارة - مساعدك الشخصي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -511,16 +511,15 @@
             }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
 
 <div class="header">
     <div class="header-top">
-        <div class="logo">مروة</div>
+        <div class="logo">سارة</div>
         <div class="datetime" id="dateTimeDisplay"></div>
     </div>
-    <div class="greeting">مرحباً <span class="name">ميرو</span> ✨</div>
+    <div class="greeting">مرحباً <span class="name">سارة</span> ✨</div>
     <div class="stats">
         <div class="stat-card">
             <div class="stat-number" id="totalSpend">0</div>
@@ -586,7 +585,7 @@
         <div class="card">
             <div class="card-title">➕ إضافة مصروف</div>
             <input type="text" id="spendDesc" placeholder="الوصف (مثال: قهوة، غداء)">
-            <input type="number" id="spendAmount" placeholder="المبلغ (جنيه مصري)" step="0.5">
+            <input type="number" id="spendAmount" placeholder="المبلغ (ريال سعودي)" step="0.5">
             <select id="spendCat">
                 <option value="طعام">🍽️ طعام</option>
                 <option value="مواصلات">🚗 مواصلات</option>
@@ -636,7 +635,7 @@
         <div class="card">
             <div class="card-title">🎯 هدف جديد</div>
             <input type="text" id="goalName" placeholder="اسم الهدف (مثال: رحلة، سيارة)">
-            <input type="number" id="goalTarget" placeholder="المبلغ المستهدف (جنيه)">
+            <input type="number" id="goalTarget" placeholder="المبلغ المستهدف (ريال)">
             <button onclick="addGoal()">🚀 إنشاء الهدف</button>
         </div>
 
@@ -660,7 +659,7 @@
     // Load data
     function loadData() {
         try {
-            const saved = localStorage.getItem('marwa_app_v5');
+            const saved = localStorage.getItem('sara_app_v5');
             if (saved) {
                 const data = JSON.parse(saved);
                 spendings = data.spendings || [];
@@ -680,7 +679,7 @@
 
     function saveData() {
         const data = { spendings, moods, thoughts, goals, streak, lastActive, tasbeehCounter };
-        localStorage.setItem('marwa_app_v5', JSON.stringify(data));
+        localStorage.setItem('sara_app_v5', JSON.stringify(data));
         updateUI();
     }
 
@@ -711,17 +710,6 @@
     }
 
     function addPhrase(phrase) {
-        const phraseEntry = {
-            id: Date.now(),
-            mood: '📿',
-            moodLabel: 'تسبيح',
-            thought: `${phrase}`,
-            date: new Date().toISOString()
-        };
-        
-        thoughts.unshift(phraseEntry);
-        moods.unshift(phraseEntry);
-        
         tasbeehCounter++;
         updateTasbeehDisplay();
         saveData();
@@ -858,7 +846,7 @@
     }
 
     function addToGoal(id) {
-        const amount = parseFloat(prompt('المبلغ المضاف للهدف (جنيه مصري):'));
+        const amount = parseFloat(prompt('المبلغ المضاف للهدف (ريال سعودي):'));
         if (!isNaN(amount) && amount > 0) {
             const goal = goals.find(g => g.id === id);
             if (goal) {
@@ -867,7 +855,7 @@
                     showToast('🎉 مبروك! لقد حققت هدفك! 🎉');
                 }
                 saveData();
-                showToast(`✅ تم إضافة ${amount} جنيه للهدف`);
+                showToast(`✅ تم إضافة ${amount} ريال للهدف`);
             }
         }
     }
@@ -900,7 +888,7 @@
                         <p>${s.category} • ${formatDate(s.date)}</p>
                     </div>
                     <div class="flex" style="align-items: center;">
-                        <div class="item-amount">${s.amount.toFixed(0)} ج.م</div>
+                        <div class="item-amount">${s.amount.toFixed(0)} ر.س</div>
                         <button class="delete-btn" onclick="deleteSpending(${s.id})">🗑️</button>
                     </div>
                 </div>
@@ -932,7 +920,7 @@
                     <div class="goal-item">
                         <div class="goal-header">
                             <span class="text-gold" style="font-weight: 700;">${escapeHtml(g.name)}</span>
-                            <span>${g.saved.toFixed(0)} / ${g.target.toFixed(0)} ج.م</span>
+                            <span>${g.saved.toFixed(0)} / ${g.target.toFixed(0)} ر.س</span>
                         </div>
                         <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
                         <div class="flex mt-1">
